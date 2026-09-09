@@ -10,22 +10,22 @@ export const About: React.FC = () => {
   const skillGroups = [
     {
       category: 'Languages & Core',
-      icon: <Code2 className="w-4 h-4 text-emerald-500" />,
+      icon: <Code2 className="w-4 h-4 text-neutral-900 dark:text-neutral-100" />,
       items: ['TypeScript', 'JavaScript (ESNext)', 'Python', 'SQL (PostgreSQL)', 'HTML5 / Modern CSS'],
     },
     {
       category: 'Web & Frameworks',
-      icon: <Globe className="w-4 h-4 text-sky-500" />,
+      icon: <Globe className="w-4 h-4 text-neutral-900 dark:text-neutral-100" />,
       items: ['React 19', 'SvelteKit 5', 'Vite', 'Tailwind CSS', 'Next.js'],
     },
     {
       category: 'Computational & Media',
-      icon: <Cpu className="w-4 h-4 text-purple-500" />,
+      icon: <Cpu className="w-4 h-4 text-neutral-900 dark:text-neutral-100" />,
       items: ['Manim (Math Animation)', 'Edge-TTS', 'FFmpeg', 'Geospatial Analytics (Leaflet)', 'Supercluster'],
     },
     {
       category: 'Infrastructure & Tooling',
-      icon: <Terminal className="w-4 h-4 text-amber-500" />,
+      icon: <Terminal className="w-4 h-4 text-neutral-900 dark:text-neutral-100" />,
       items: ['Cloudflare Workers', 'Supabase (Auth/RLS)', 'GitHub Actions', 'Git / Linux', 'Agent Toolchains'],
     },
   ];

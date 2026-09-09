@@ -78,7 +78,7 @@ export const SocialIcon: React.FC<SocialIconProps> = ({
       href={social.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${social.name} profile (${social.username}) - opens in new tab`}
+      aria-label={`${social.name} profile (${social.username}) · opens in new tab`}
       title={`${social.name}: ${social.username}${social.placeholder ? ' (Configuration placeholder)' : ''}`}
       className={`group relative inline-flex items-center gap-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600 ${containerSizes[size]} ${className}`}
     >

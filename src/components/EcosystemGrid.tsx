@@ -62,13 +62,7 @@ export const EcosystemGrid: React.FC = () => {
                     {project.category}
                   </span>
 
-                  <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${
-                    project.status === 'Live'
-                      ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200/50 dark:border-emerald-800/50'
-                      : project.status === 'Open Source'
-                      ? 'bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-300 border border-sky-200/50 dark:border-sky-800/50'
-                      : 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200/50 dark:border-amber-800/50'
-                  }`}>
+                  <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700">
                     {project.status}
                   </span>
                 </div>
@@ -86,7 +80,7 @@ export const EcosystemGrid: React.FC = () => {
                 {/* Highlight metric if present */}
                 {project.highlightMetric && (
                   <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-mono text-neutral-500 dark:text-neutral-400">
-                    <Sparkles className="w-3 h-3 text-amber-500" />
+                    <Sparkles className="w-3 h-3 text-neutral-900 dark:text-neutral-100" />
                     <span>{project.highlightMetric}</span>
                   </div>
                 )}

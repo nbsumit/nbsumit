@@ -5,8 +5,10 @@
   "type": "module",
   "description": "Official ecosystem website for Sumit Sengar (nbsumit.com)",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/dev.cjs",
+    "prebuild": "node scripts/prebuild.cjs",
     "build": "tsc -b && vite build",
+    "postbuild": "node scripts/postbuild.cjs",
     "preview": "vite preview"
   },
   "dependencies": {

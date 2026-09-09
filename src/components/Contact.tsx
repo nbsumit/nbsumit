@@ -58,7 +58,7 @@ export const Contact: React.FC = () => {
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                  <Check className="w-3.5 h-3.5 text-neutral-900 dark:text-neutral-100" />
                   <span>Copied</span>
                 </>
               ) : (
@@ -92,8 +92,8 @@ export const Contact: React.FC = () => {
                 href={platform.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Visit ${platform.name} profile (${platform.username}) - opens in new tab`}
-                title={`${platform.name} profile - ${platform.username}`}
+                aria-label={`Visit ${platform.name} profile (${platform.username}) · opens in new tab`}
+                title={`${platform.name} profile · ${platform.username}`}
                 className="group p-4 rounded-xl bg-white dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/80 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all flex flex-col justify-between"
               >
                 <div>
@@ -121,7 +121,7 @@ export const Contact: React.FC = () => {
                 <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/50 flex items-center justify-between text-[11px] text-neutral-500">
                   <span className="font-mono">Open in new tab</span>
                   {platform.placeholder && (
-                    <span className="font-mono text-[10px] text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded">
+                    <span className="font-mono text-[10px] text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">
                       Configurable
                     </span>
                   )}

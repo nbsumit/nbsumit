@@ -82,9 +82,14 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCom
             type="button"
             onClick={() => setDarkMode(!darkMode)}
             aria-label={darkMode ? 'Switch to light theme' : 'Switch to dark theme'}
-            className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400"
+            title={darkMode ? 'Switch to light theme' : 'Switch to dark theme'}
+            className="p-2 rounded-lg text-neutral-950 dark:text-neutral-100 hover:bg-neutral-200/70 dark:hover:bg-neutral-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500"
           >
-            {darkMode ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5" />}
+            {darkMode ? (
+              <Sun className="w-5 h-5 text-neutral-100" />
+            ) : (
+              <Moon className="w-5 h-5 text-neutral-950" />
+            )}
           </button>
 
           {/* Mobile Menu Button */}

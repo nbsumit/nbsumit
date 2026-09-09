@@ -8,7 +8,7 @@
 
 ## Explore
 
-🌐 **Website** · [https://nbsumit.com](https://nbsumit.com)
+**Website** · [https://nbsumit.com](https://nbsumit.com)
 
 ---
 
@@ -25,17 +25,17 @@ A concise focus on utility, research, and craftsmanship:
 
 ## Connect
 
-🐙 **GitHub** · [@nbsumit](https://github.com/nbsumit)
+**GitHub** · [@nbsumit](https://github.com/nbsumit)
 
-💼 **LinkedIn** · [@nbsumit](https://www.linkedin.com/in/nbsumit)
+**LinkedIn** · [@nbsumit](https://www.linkedin.com/in/nbsumit)
 
-𝕏 **X** · [@nbsumit](https://x.com/nbsumit)
+**X** · [@nbsumit](https://x.com/nbsumit)
 
-📸 **Instagram** · [@nbsumit](https://www.instagram.com/nbsumit)
+**Instagram** · [@nbsumit](https://www.instagram.com/nbsumit)
 
-▶️ **YouTube** · [@nbsumit](https://www.youtube.com/@nbsumit)
+**YouTube** · [@nbsumit](https://www.youtube.com/@nbsumit)
 
-✉️ **Email** · [hello@nbsumit.com](mailto:hello@nbsumit.com)
+**Email** · [hello@nbsumit.com](mailto:hello@nbsumit.com)
 
 ---
 

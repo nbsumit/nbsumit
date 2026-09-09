@@ -4,22 +4,22 @@ import { ShieldCheck, Zap, Eye, Code2 } from 'lucide-react';
 export const Philosophy: React.FC = () => {
   const principles = [
     {
-      icon: <Zap className="w-5 h-5 text-amber-500" />,
+      icon: <Zap className="w-5 h-5 text-neutral-900 dark:text-neutral-100" />,
       title: 'Zero-Bloat Simplicity',
       description: 'Prioritize native web standards, minimal runtime dependencies, and tight bundle sizes over heavy abstractions.',
     },
     {
-      icon: <ShieldCheck className="w-5 h-5 text-emerald-500" />,
+      icon: <ShieldCheck className="w-5 h-5 text-neutral-900 dark:text-neutral-100" />,
       title: 'Deterministic Correctness',
       description: 'Design systems where state, transitions, and mathematical pipelines behave predictably under edge cases.',
     },
     {
-      icon: <Eye className="w-5 h-5 text-sky-500" />,
+      icon: <Eye className="w-5 h-5 text-neutral-900 dark:text-neutral-100" />,
       title: 'Pedagogical & Visual Clarity',
       description: 'Transform complex computational concepts (from calculus to geospatial coordinates) into intuitive, visual experiences.',
     },
     {
-      icon: <Code2 className="w-5 h-5 text-purple-500" />,
+      icon: <Code2 className="w-5 h-5 text-neutral-900 dark:text-neutral-100" />,
       title: 'Autonomous & Open Craft',
       description: 'Build transparent software toolchains, reproducible workflows, and ergonomic interfaces crafted for builders.',
     },
