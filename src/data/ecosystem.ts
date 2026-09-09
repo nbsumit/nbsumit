@@ -63,16 +63,4 @@ export const ECOSYSTEM_PROJECTS: ProjectItem[] = [
     featured: true,
     highlightMetric: 'Instant client-side clustering',
   },
-  {
-    id: 'ecc',
-    title: 'Everything Claude Code (ECC)',
-    category: 'Developer Tools',
-    description: 'Comprehensive agent orchestration harnesses, workflow extensions, and developer tooling.',
-    longDescription: 'Modular developer orchestration framework integrating agent skills, multi-model sidecars, automated verification loops, and test harnesses for rapid agentic coding workflows.',
-    tags: ['TypeScript', 'Python', 'CLI', 'Agent Systems', 'Toolchains'],
-    repoUrl: 'https://github.com/nbsumit/ECC',
-    status: 'Open Source',
-    featured: false,
-    highlightMetric: 'Multi-agent developer harness',
-  },
 ];

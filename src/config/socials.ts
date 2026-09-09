@@ -23,39 +23,39 @@ export const SOCIAL_LINKS: Record<'github' | 'linkedin' | 'x' | 'instagram' | 'y
     url: 'https://github.com/nbsumit',
     placeholder: false,
     username: '@nbsumit',
-    description: 'Open source repositories, experiments, and developer toolchains',
+    description: 'Open source repositories, tools, and research experiments',
   },
   linkedin: {
     id: 'linkedin',
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/YOUR_USERNAME', // Replace with your LinkedIn profile URL
-    placeholder: true,
-    username: 'Sumit Sengar',
-    description: 'Professional experience, engineering network, and updates',
+    url: 'https://www.linkedin.com/in/nbsumit',
+    placeholder: false,
+    username: '@nbsumit',
+    description: 'Professional background, engineering network, and updates',
   },
   x: {
     id: 'x',
     name: 'X (Twitter)',
-    url: 'https://x.com/YOUR_USERNAME', // Replace with your X / Twitter handle URL
-    placeholder: true,
-    username: '@YOUR_USERNAME',
-    description: 'Tech thoughts, build-in-public logs, and quick announcements',
+    url: 'https://x.com/nbsumit',
+    placeholder: false,
+    username: '@nbsumit',
+    description: 'Thoughts on software engineering, computational tools, and building',
   },
   instagram: {
     id: 'instagram',
     name: 'Instagram',
-    url: 'https://www.instagram.com/YOUR_USERNAME', // Replace with your Instagram profile URL
-    placeholder: true,
-    username: '@YOUR_USERNAME',
-    description: 'Visual stories, creative interests, and life beyond code',
+    url: 'https://www.instagram.com/nbsumit',
+    placeholder: false,
+    username: '@nbsumit',
+    description: 'Visual moments, creative pursuits, and life beyond code',
   },
   youtube: {
     id: 'youtube',
     name: 'YouTube',
-    url: 'https://youtube.com/@YOUR_CHANNEL', // Replace with your YouTube channel URL
-    placeholder: true,
-    username: '@YOUR_CHANNEL',
-    description: 'Educational tech walkthroughs, math animations, and software guides',
+    url: 'https://www.youtube.com/@nbsumit',
+    placeholder: false,
+    username: '@nbsumit',
+    description: 'Educational software demos, computational visuals, and walkthroughs',
   },
 };
 
