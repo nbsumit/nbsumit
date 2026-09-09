@@ -43,7 +43,7 @@ export const ECOSYSTEM_PROJECTS: ProjectItem[] = [
     id: 'math-video-generator',
     title: 'Math Video Generator',
     category: 'Computational Tool',
-    description: 'Algorithmic 3Blue1Brown-style mathematical video generator with Edge-TTS and dynamic subtitles.',
+    description: 'Algorithmic mathematical video generator with Edge-TTS and dynamic subtitles.',
     longDescription: 'An automated educational video synthesis engine that converts structured mathematical scripts into fluid, continuous geometric animations using Manim, synchronized neural voice narration, and frame-accurate burned captions.',
     tags: ['Python', 'Manim', 'Edge-TTS', 'FFmpeg', 'Dynamic Subtitles'],
     repoUrl: 'https://github.com/nbsumit/math-video-generator',
