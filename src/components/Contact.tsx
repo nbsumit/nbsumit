@@ -38,11 +38,11 @@ export const Contact: React.FC = () => {
             </div>
             <div>
               <p className="text-xs font-mono uppercase tracking-wider text-neutral-500">
-                Direct Inquiries
+                Email
               </p>
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="text-base sm:text-lg font-bold text-neutral-950 dark:text-white hover:underline"
+                className="text-base sm:text-lg font-bold text-neutral-950 dark:text-white hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 rounded"
               >
                 {SITE_CONFIG.email}
               </a>
@@ -70,10 +70,11 @@ export const Contact: React.FC = () => {
             </button>
             <a
               href={`mailto:${SITE_CONFIG.email}`}
-              className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
+              aria-label={`Send email to ${SITE_CONFIG.email}`}
             >
-              <span>Write Email</span>
-              <ExternalLink className="w-3 h-3" />
+              <Mail className="w-3.5 h-3.5" />
+              <span>Send Email</span>
             </a>
           </div>
         </div>

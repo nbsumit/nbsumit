@@ -1,6 +1,7 @@
 import React from 'react';
-import { User, Cpu, Code2, Globe, Terminal } from 'lucide-react';
+import { User, Cpu, Code2, Globe, Terminal, Mail } from 'lucide-react';
 import { getAllSocialLinks } from '../config/socials';
+import { SITE_CONFIG } from '../config/site';
 import { SocialIcon } from './SocialIcon';
 
 export const About: React.FC = () => {
@@ -73,6 +74,18 @@ export const About: React.FC = () => {
                   />
                 ))}
               </div>
+            </div>
+
+            {/* Direct Contact Reference */}
+            <div className="pt-4 border-t border-neutral-200/60 dark:border-neutral-800/60 flex items-center gap-2 text-xs font-mono">
+              <span className="text-neutral-500 uppercase tracking-wider">Contact:</span>
+              <a
+                href={`mailto:${SITE_CONFIG.email}`}
+                className="text-neutral-900 dark:text-neutral-100 hover:underline inline-flex items-center gap-1 font-semibold"
+              >
+                <Mail className="w-3.5 h-3.5 text-neutral-400" />
+                <span>{SITE_CONFIG.email}</span>
+              </a>
             </div>
           </div>
 

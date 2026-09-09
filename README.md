@@ -38,7 +38,7 @@ The five primary platforms supporting my digital presence:
 - 📺 **YouTube:** [@YOUR_CHANNEL on YouTube](https://youtube.com/@YOUR_CHANNEL) *(Replace with channel URL)*
 
 Direct contact:
-- ✉️ **Email:** [hello@sumitsengar.me](mailto:hello@sumitsengar.me)
+- ✉️ **Email:** [hello@nbsumit.com](mailto:hello@nbsumit.com)
 - 🌍 **Website:** [nbsumit.com](https://nbsumit.com)
 
 ---
