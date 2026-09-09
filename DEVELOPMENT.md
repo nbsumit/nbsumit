@@ -1,4 +1,4 @@
-# DEVELOPMENT.md — nbsumit.com Ecosystem Website
+# DEVELOPMENT.md | nbsumit.com Ecosystem Website
 
 This repository houses both the **official website for [nbsumit.com](https://nbsumit.com)** and the **GitHub Profile README for [@nbsumit](https://github.com/nbsumit)**.
 
@@ -65,11 +65,11 @@ src/config/socials.ts
 ```
 
 The supported platforms are:
-1. **GitHub** (`github`) — defaults to `https://github.com/nbsumit`
-2. **LinkedIn** (`linkedin`) — placeholder `https://www.linkedin.com/in/YOUR_USERNAME`
-3. **X (Twitter)** (`x`) — placeholder `https://x.com/YOUR_USERNAME`
-4. **Instagram** (`instagram`) — placeholder `https://www.instagram.com/YOUR_USERNAME`
-5. **YouTube** (`youtube`) — placeholder `https://youtube.com/@YOUR_CHANNEL`
+1. **GitHub** (`github`): `https://github.com/nbsumit`
+2. **LinkedIn** (`linkedin`): `https://www.linkedin.com/in/nbsumit`
+3. **X (Twitter)** (`x`): `https://x.com/nbsumit`
+4. **Instagram** (`instagram`): `https://www.instagram.com/nbsumit`
+5. **YouTube** (`youtube`): `https://www.youtube.com/@nbsumit`
 
 ### How to update your URLs:
 Open `src/config/socials.ts` and replace the placeholder URLs with your actual profile URLs.

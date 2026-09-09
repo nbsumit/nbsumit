@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   brand: 'NB',
   domain: 'nbsumit.com',
   url: 'https://nbsumit.com',
-  title: 'Sumit Sengar (nbsumit) — Software Engineer & Builder',
+  title: 'nbsumit | Home',
   description: 'Personal software ecosystem, open source tools, computational exploration, and creative engineering by Sumit Sengar (@nbsumit).',
   email: 'hello@nbsumit.com',
   status: 'Building and exploring computational tools & digital platforms',

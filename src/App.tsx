@@ -30,6 +30,42 @@ export const App: React.FC = () => {
     }
   }, [darkMode]);
 
+  // Page title observer according to format: nbsumit | [Page Name]
+  useEffect(() => {
+    const sectionTitleMap: Record<string, string> = {
+      ecosystem: 'nbsumit | Projects',
+      philosophy: 'nbsumit | Philosophy',
+      about: 'nbsumit | About',
+      connect: 'nbsumit | Contact',
+    };
+
+    const handleScroll = () => {
+      const sections = ['connect', 'about', 'philosophy', 'ecosystem'];
+      let currentSection = '';
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) {
+            currentSection = sectionId;
+            break;
+          }
+        }
+      }
+
+      if (currentSection && sectionTitleMap[currentSection]) {
+        document.title = sectionTitleMap[currentSection];
+      } else {
+        document.title = 'nbsumit | Home';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-900">
       {/* Navigation */}

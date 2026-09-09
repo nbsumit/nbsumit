@@ -16,7 +16,7 @@ export const Philosophy: React.FC = () => {
     {
       icon: <Eye className="w-5 h-5 text-sky-500" />,
       title: 'Pedagogical & Visual Clarity',
-      description: 'Transform complex computational concepts—from calculus to geospatial coordinates—into intuitive, visual experiences.',
+      description: 'Transform complex computational concepts (from calculus to geospatial coordinates) into intuitive, visual experiences.',
     },
     {
       icon: <Code2 className="w-5 h-5 text-purple-500" />,

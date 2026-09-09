@@ -54,7 +54,7 @@ export const About: React.FC = () => {
                 My work spans designing low-latency identity platforms like <strong className="text-neutral-900 dark:text-white font-semibold">Bittyfy</strong>, running a personal reflective writing space at <strong className="text-neutral-900 dark:text-white font-semibold">sumitsengar.me</strong>, engineering programmatic mathematical visualization engines, and developing autonomous agent tools.
               </p>
               <p>
-                I value software that is fast, resilient, and transparent—systems with minimal bloat, clear mental models, and uncompromising attention to detail.
+                I value software that is fast, resilient, and transparent: systems with minimal bloat, clear mental models, and uncompromising attention to detail.
               </p>
             </div>
 
