@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Title & SEO -->
+    <title>Sumit Sengar (nbsumit) — Software Engineer &amp; Builder</title>
+    <meta name="description" content="Personal software ecosystem, open source tools, computational exploration, and creative engineering by Sumit Sengar (@nbsumit)." />
+    <meta name="author" content="Sumit Sengar" />
+    <meta name="keywords" content="Sumit Sengar, nbsumit, Bittyfy, sumitsengar.me, software engineer, developer ecosystem, open source" />
+    <link rel="canonical" href="https://nbsumit.com" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nbsumit.com" />
+    <meta property="og:title" content="Sumit Sengar (nbsumit) — Software Engineer &amp; Builder" />
+    <meta property="og:description" content="Personal software ecosystem, open source tools, computational exploration, and creative engineering by Sumit Sengar (@nbsumit)." />
+    <meta property="og:site_name" content="nbsumit.com" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nbsumit.com" />
+    <meta name="twitter:title" content="Sumit Sengar (nbsumit) — Software Engineer &amp; Builder" />
+    <meta name="twitter:description" content="Personal software ecosystem, open source tools, computational exploration, and creative engineering by Sumit Sengar (@nbsumit)." />
+
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Theme initialization to prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
