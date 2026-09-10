@@ -66,12 +66,14 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCom
           <button
             type="button"
             onClick={onOpenCommand}
-            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors"
             aria-label="Open command palette"
           >
-            <Command className="w-3.5 h-3.5" />
+            <Command className="w-3.5 h-3.5 shrink-0" />
             <span>Search</span>
-            <kbd className="font-mono text-[10px] bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 px-1 rounded">⌘K</kbd>
+            <kbd className="inline-flex items-center gap-0.5 font-mono text-[10px] leading-none bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 px-1.5 py-0.5 rounded select-none">
+              <span>⌘</span><span>K</span>
+            </kbd>
           </button>
 
           {/* Direct GitHub Icon Link */}
