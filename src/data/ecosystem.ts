@@ -51,16 +51,4 @@ export const ECOSYSTEM_PROJECTS: ProjectItem[] = [
     featured: true,
     highlightMetric: '100% programmatic video render',
   },
-  {
-    id: 'csv-map-visualizer',
-    title: 'CSV Map Visualizer',
-    category: 'Computational Tool',
-    description: 'High-speed interactive geospatial analytics and coordinate mapping for large datasets.',
-    longDescription: 'Browser-based geospatial explorer that instantly parses complex CSV coordinates into clustered heatmaps, spatial distribution graphs, and downloadable reports without sending data to an external server.',
-    tags: ['React', 'TypeScript', 'Leaflet', 'Supercluster', 'Vite'],
-    repoUrl: 'https://github.com/nbsumit/csv-map-visualizer',
-    status: 'Open Source',
-    featured: true,
-    highlightMetric: 'Instant client-side clustering',
-  },
 ];
