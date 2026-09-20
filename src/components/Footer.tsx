@@ -19,9 +19,9 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="flex items-center gap-2.5">
               <img
-                src="/favicon/favicon-32x32.png"
+                src="/nb-brand.png"
                 alt="NB Brand"
-                className="w-6 h-6 rounded-md opacity-80"
+                className="w-6 h-6 opacity-80"
               />
               <span className="font-bold text-neutral-900 dark:text-white text-sm">
                 {SITE_CONFIG.name}
