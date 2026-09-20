@@ -22,22 +22,37 @@ if (fs.existsSync(rootAssets)) {
 fs.cpSync(distAssets, rootAssets, { recursive: true });
 console.log('✓ Synced dist/assets -> ./assets');
 
-// 3. Copy dist/site.webmanifest to root
+// 3. Keep the official NB favicon package available from the repository root too.
+// nbsumit.com currently has both artifact-based and root-based Pages publishing paths,
+// so /favicon/* must resolve correctly in either deployment.
+const publicFavicon = path.join(rootDir, 'public', 'favicon');
+const rootFavicon = path.join(rootDir, 'favicon');
+if (!fs.existsSync(publicFavicon)) {
+  console.error('Error: public/favicon directory does not exist.');
+  process.exit(1);
+}
+if (fs.existsSync(rootFavicon)) {
+  fs.rmSync(rootFavicon, { recursive: true, force: true });
+}
+fs.cpSync(publicFavicon, rootFavicon, { recursive: true });
+console.log('✓ Synced ./public/favicon -> ./favicon');
+
+// 4. Copy dist/site.webmanifest to root
 const manifestSrc = path.join(distDir, 'site.webmanifest');
 if (fs.existsSync(manifestSrc)) {
   fs.copyFileSync(manifestSrc, path.join(rootDir, 'site.webmanifest'));
   console.log('✓ Synced dist/site.webmanifest -> ./site.webmanifest');
 }
 
-// 4. Ensure .nojekyll exists in root
+// 5. Ensure .nojekyll exists in root
 fs.writeFileSync(path.join(rootDir, '.nojekyll'), '');
 console.log('✓ Verified ./.nojekyll');
 
-// 5. Ensure CNAME exists in root
+// 6. Ensure CNAME exists in root
 fs.writeFileSync(path.join(rootDir, 'CNAME'), 'nbsumit.com\n');
 console.log('✓ Verified ./CNAME (nbsumit.com)');
 
-// 6. QA Check: Ensure no em dash (—) character in any production file
+// 7. QA Check: Ensure no em dash (—) character in any production file
 const checkFiles = [
   path.join(rootDir, 'index.html'),
   path.join(rootDir, 'site.webmanifest'),
