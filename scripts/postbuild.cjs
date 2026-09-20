@@ -37,6 +37,24 @@ if (fs.existsSync(rootFavicon)) {
 fs.cpSync(publicFavicon, rootFavicon, { recursive: true });
 console.log('✓ Synced ./public/favicon -> ./favicon');
 
+const rootIconFiles = [
+  'favicon.ico',
+  'favicon-32x32.png',
+  'favicon-16x16.png',
+  'apple-touch-icon.png',
+  'android-chrome-192x192.png',
+  'android-chrome-512x512.png'
+];
+for (const file of rootIconFiles) {
+  const src = path.join(distDir, file);
+  if (!fs.existsSync(src)) {
+    console.error(`Error: missing production icon ${file}`);
+    process.exit(1);
+  }
+  fs.copyFileSync(src, path.join(rootDir, file));
+}
+console.log('✓ Synced standard root favicon files');
+
 // 4. Copy dist/site.webmanifest to root
 const manifestSrc = path.join(distDir, 'site.webmanifest');
 if (fs.existsSync(manifestSrc)) {
