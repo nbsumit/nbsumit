@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
               <img
                 src="/nb-brand.png"
                 alt="NB Brand"
-                className="w-6 h-6 opacity-80"
+                className="w-6 h-6 object-contain opacity-80"
               />
               <span className="font-bold text-neutral-900 dark:text-white text-sm">
                 {SITE_CONFIG.name}
