@@ -22,7 +22,7 @@ export const Hero: React.FC = () => {
             <img
               src="/nb-brand.png"
               alt="Sumit Sengar / NB Brand"
-              className="w-10 h-10 shadow-sm ring-1 ring-neutral-300 dark:ring-neutral-700"
+              className="w-10 h-10 object-contain shadow-sm ring-1 ring-neutral-300 dark:ring-neutral-700"
             />
             <div>
               <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-neutral-950 dark:text-white">
@@ -48,7 +48,7 @@ export const Hero: React.FC = () => {
         <div className="flex flex-wrap items-center gap-3 pt-2">
           <a
             href="#ecosystem"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 font-medium text-sm hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 font-medium text-sm hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all shadow-xs"
           >
             <span>Explore Ecosystem</span>
             <ArrowRight className="w-4 h-4" />
@@ -58,7 +58,7 @@ export const Hero: React.FC = () => {
             href="https://sumitsengar.me"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800/60 transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 font-medium text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800/60 transition-all"
           >
             <BookOpen className="w-4 h-4 text-neutral-500" />
             <span>Read Essays</span>
@@ -66,7 +66,7 @@ export const Hero: React.FC = () => {
 
           <a
             href="#connect"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white font-medium text-sm transition-colors"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white font-medium text-sm transition-colors"
           >
             <span>Get in Touch</span>
           </a>
