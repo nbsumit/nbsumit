@@ -27,6 +27,18 @@ export const ECOSYSTEM_PROJECTS: ProjectItem[] = [
     highlightMetric: 'Sub-50ms edge redirects',
   },
   {
+    id: 'ritayukti',
+    title: 'Ritayukti',
+    category: 'Web Platform',
+    description: 'A calm daily planner for meaningful priorities, focused work, daily rituals, and reflection.',
+    longDescription: 'Ritayukti helps people choose their most important work, define a clear next action, and give it focused time. Includes daily and weekly views, a task inbox, ritual tracking, light and dark themes, and local backup and restore. Planner entries stay in the browser, with no account required.',
+    tags: ['JavaScript', 'HTML & CSS', 'Local Storage', 'Sites'],
+    url: 'https://ritayukti.dev',
+    status: 'Live',
+    featured: true,
+    highlightMetric: 'No account. Browser-local data.',
+  },
+  {
     id: 'sumitsengar-me',
     title: 'sumitsengar.me',
     category: 'Writing & Essays',
