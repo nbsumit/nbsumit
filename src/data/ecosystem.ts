@@ -21,7 +21,6 @@ export const ECOSYSTEM_PROJECTS: ProjectItem[] = [
     longDescription: 'Bittyfy rethinks short links into readable personal identifiers (e.g. bittyfy.com/design) tailored for creators, freelancers, and independent businesses. Features sub-50ms edge resolution, Supabase RLS, and clean privacy controls.',
     tags: ['SvelteKit 5', 'Cloudflare Workers', 'Supabase', 'Tailwind CSS', 'PostgreSQL'],
     url: 'https://bittyfy.com',
-    repoUrl: 'https://github.com/nbsumit/bittyfy.com',
     status: 'Live',
     featured: true,
     highlightMetric: 'Sub-50ms edge redirects',
