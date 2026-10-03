@@ -51,7 +51,7 @@ export const About: React.FC = () => {
                 I am a software engineer and builder passionate about creating clean, reliable web applications, educational computational tools, and developer workflows.
               </p>
               <p>
-                My work spans designing low-latency identity platforms like <strong className="text-neutral-900 dark:text-white font-semibold">Bittyfy</strong>, privacy-first utilities like <strong className="text-neutral-900 dark:text-white font-semibold">ApplyReady</strong>, client-side geoinformatics in <strong className="text-neutral-900 dark:text-white font-semibold">GIS Tools</strong>, running a personal reflective writing space at <strong className="text-neutral-900 dark:text-white font-semibold">sumitsengar.me</strong>, engineering programmatic mathematical visualization engines, and developing autonomous agent tools.
+                My work spans designing low-latency identity platforms like <strong className="text-neutral-900 dark:text-white font-semibold">Bittyfy</strong>, privacy-first utilities like <strong className="text-neutral-900 dark:text-white font-semibold">ApplyReady</strong>, calm productivity spaces like <strong className="text-neutral-900 dark:text-white font-semibold">Ritayukti</strong>, running a personal reflective writing space at <strong className="text-neutral-900 dark:text-white font-semibold">sumitsengar.me</strong>, engineering programmatic mathematical visualization engines, and developing autonomous agent tools.
               </p>
               <p>
                 I value software that is fast, resilient, and transparent: systems with minimal bloat, clear mental models, and uncompromising attention to detail.

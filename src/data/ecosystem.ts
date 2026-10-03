@@ -1,7 +1,7 @@
 export interface ProjectItem {
   id: string;
   title: string;
-  category: 'Web Platform' | 'Computational Tool' | 'Writing & Essays' | 'Developer Tools';
+  category: 'Web Platform' | 'Computational Tool' | 'Writing & Essays';
   description: string;
   longDescription: string;
   tags: string[];
@@ -49,30 +49,6 @@ export const ECOSYSTEM_PROJECTS: ProjectItem[] = [
     status: 'Live',
     featured: true,
     highlightMetric: 'No account. Browser-local data.',
-  },
-  {
-    id: 'gis-tools',
-    title: 'GIS Tools',
-    category: 'Computational Tool',
-    description: 'Client-side instruments for geoinformatics, spatial decision models, coordinate geodesics, and terrain analysis.',
-    longDescription: 'A comprehensive suite of client-side instruments for geospatial workflows and analytical cartography. Includes Analytic Hierarchy Process (AHP), Weighted Linear Combination (WLC), spectral band indices, geodesic measurements, GeoJSON inspection, terrain analysis, and map scale math, executing entirely in-browser with zero data uploads.',
-    tags: ['Geoinformatics', 'Spatial Analysis', 'JavaScript', 'GeoJSON', 'Client-Side Computing'],
-    url: 'https://gis.nbsumit.com',
-    status: 'Active Development',
-    featured: true,
-    highlightMetric: '100% client-side geoprocessing',
-  },
-  {
-    id: 'developer-tools',
-    title: 'Developer Tools',
-    category: 'Developer Tools',
-    description: 'Zero-bloat suite of essential engineering utilities, code formatters, encoders, and debugging tools.',
-    longDescription: 'A fast, client-side utility workbench engineered for everyday developer workflows. Includes formatters, converters, cryptography helpers, regex testers, and encoding instruments running locally in the browser with zero tracking.',
-    tags: ['Developer Tools', 'TypeScript', 'Web APIs', 'Utilities', 'Productivity'],
-    url: 'https://tools.nbsumit.com',
-    status: 'Active Development',
-    featured: true,
-    highlightMetric: 'Zero telemetry developer suite',
   },
   {
     id: 'sumitsengar-me',

@@ -5,7 +5,7 @@ import { ECOSYSTEM_PROJECTS } from '../data/ecosystem';
 export const EcosystemGrid: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const categories = ['All', 'Web Platform', 'Computational Tool', 'Writing & Essays', 'Developer Tools'];
+  const categories = ['All', 'Web Platform', 'Computational Tool', 'Writing & Essays'];
 
   const filteredProjects = selectedCategory === 'All'
     ? ECOSYSTEM_PROJECTS
