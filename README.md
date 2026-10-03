@@ -20,18 +20,3 @@ AI is used where it improves research, iteration, coding, or production speed, w
 ## Contact
 
 Email only: [hello@nbsumit.com](mailto:hello@nbsumit.com)
-
-## Development
-
-This is a React + TypeScript + Vite site styled with Tailwind CSS and deployed to GitHub Pages through GitHub Actions.
-
-```bash
-npm ci
-npm run dev
-```
-
-Production build:
-
-```bash
-npm run build
-```
