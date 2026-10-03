@@ -1,42 +1,37 @@
-# Sumit Sengar
+# nbsumit.com
 
-> Building useful software, tools, and research.
+[nbsumit.com](https://nbsumit.com) is the professional home of Sumit Sengar, an independent multidisciplinary builder.
 
-[nbsumit.com](https://nbsumit.com) is the central home for practical software, time-saving tools, research, and future experiments built under the NB identity.
+The site brings together work across:
 
----
+- Web and software
+- Design and visual systems
+- GIS and geospatial workflows
+- Documents and technical communication
+- Data and automation
+- AI-assisted prototyping and production
 
-## Explore
+## Approach
 
-**Website** · [https://nbsumit.com](https://nbsumit.com)
+One person, many tools.
 
----
+AI is used where it improves research, iteration, coding, or production speed, while final responsibility for decisions, implementation, review, testing, and delivery remains human-owned.
 
-## What I'm Building
+## Contact
 
-A concise focus on utility, research, and craftsmanship:
+Email only: [hello@nbsumit.com](mailto:hello@nbsumit.com)
 
-• Useful software  
-• Practical tools  
-• Time-saving workflows  
-• Research-driven projects  
+## Development
 
----
+This is a React + TypeScript + Vite site styled with Tailwind CSS and deployed to GitHub Pages through GitHub Actions.
 
-## Connect
+```bash
+npm ci
+npm run dev
+```
 
-**GitHub** · [@nbsumit](https://github.com/nbsumit)
+Production build:
 
-**LinkedIn** · [@nbsumit](https://www.linkedin.com/in/nbsumit)
-
-**X** · [@nbsumit](https://x.com/nbsumit)
-
-**Instagram** · [@nbsumit](https://www.instagram.com/nbsumit)
-
-**YouTube** · [@nbsumit](https://www.youtube.com/@nbsumit)
-
-**Email** · [hello@nbsumit.com](mailto:hello@nbsumit.com)
-
----
-
-Building for long-term utility, clarity, and independent craftsmanship.
+```bash
+npm run build
+```

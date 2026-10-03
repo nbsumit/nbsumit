@@ -1,7 +1,3 @@
-/**
- * Centralized Site Configuration
- */
-
 export const SITE_CONFIG = {
   name: 'Sumit Sengar',
   handle: 'nbsumit',
@@ -9,14 +5,15 @@ export const SITE_CONFIG = {
   domain: 'nbsumit.com',
   url: 'https://nbsumit.com',
   title: 'nbsumit | Home',
-  description: 'Personal software ecosystem, open source tools, computational exploration, and creative engineering by Sumit Sengar (@nbsumit).',
+  description: 'Independent multidisciplinary builder working across software, design, GIS, data, automation, and technical communication.',
   email: 'hello@nbsumit.com',
-  status: 'Building and exploring computational tools & digital platforms',
-  availability: 'Open for high-impact technical collaborations',
+  status: 'Available for focused projects and collaborations',
+  availability: 'Available for small and focused projects',
   navLinks: [
-    { label: 'Ecosystem', href: '#ecosystem' },
-    { label: 'Philosophy', href: '#philosophy' },
+    { label: 'Capabilities', href: '#capabilities' },
+    { label: 'Work', href: '#ecosystem' },
+    { label: 'Process', href: '#process' },
     { label: 'About', href: '#about' },
-    { label: 'Connect', href: '#connect' },
+    { label: 'Contact', href: '#connect' },
   ],
 };
