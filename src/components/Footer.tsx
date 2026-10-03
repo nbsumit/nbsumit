@@ -10,13 +10,13 @@ export const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
           <div className="flex flex-col sm:flex-row items-center gap-3">
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5 h-6">
               <img src="/nb-brand.png" alt="NB brand" className="w-6 h-6 object-contain opacity-80" />
-              <span className="font-bold text-neutral-900 dark:text-white text-sm">{SITE_CONFIG.name}</span>
+              <span className="font-bold text-neutral-900 dark:text-white text-sm leading-none">{SITE_CONFIG.name}</span>
             </div>
-            <span className="hidden sm:inline text-neutral-400">·</span>
-            <a href={'mailto:' + SITE_CONFIG.email} className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors">
-              <Mail className="w-3.5 h-3.5" /><span>{SITE_CONFIG.email}</span>
+            <span className="hidden sm:inline text-neutral-400 leading-none">·</span>
+            <a href={'mailto:' + SITE_CONFIG.email} className="inline-flex items-center gap-1.5 h-6 text-xs font-mono leading-none text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors">
+              <Mail className="w-3.5 h-3.5 shrink-0" /><span className="leading-none">{SITE_CONFIG.email}</span>
             </a>
           </div>
 
