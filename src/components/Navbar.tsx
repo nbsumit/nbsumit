@@ -34,8 +34,8 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCom
         </nav>
 
         <div className="flex items-center gap-2">
-          <button type="button" onClick={onOpenCommand} className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors" aria-label="Open command palette">
-            <Command className="w-3.5 h-3.5" /><span>Search</span>
+          <button type="button" onClick={onOpenCommand} className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 rounded-md transition-colors" aria-label="Open search with Ctrl+K">
+            <Command className="w-3.5 h-3.5" /><span className="font-mono">K</span>
           </button>
           <button type="button" onClick={() => setDarkMode(!darkMode)} aria-label={darkMode ? 'Switch to light theme' : 'Switch to dark theme'} title={darkMode ? 'Switch to light theme' : 'Switch to dark theme'} className="p-2 rounded-lg text-neutral-950 dark:text-neutral-100 hover:bg-neutral-200/70 dark:hover:bg-neutral-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500">
             {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ darkMode, setDarkMode, onOpenCom
           </nav>
           <div className="pt-3 border-t border-neutral-200 dark:border-neutral-800">
             <button type="button" onClick={() => { setMobileMenuOpen(false); onOpenCommand(); }} className="w-full px-3 py-2 text-sm rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center gap-2">
-              <Command className="w-4 h-4" /><span>Search site</span>
+              <Command className="w-4 h-4" /><span>K</span>
             </button>
           </div>
         </div>

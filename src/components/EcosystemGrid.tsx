@@ -37,7 +37,7 @@ export const EcosystemGrid: React.FC = () => {
               </div>
               <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800/60">
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.tags.slice(0, 4).map((tag) => <span key={tag} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800/80 text-neutral-500 dark:text-neutral-400">{tag}</span>)}
+                  {project.tags.slice(0, project.id === 'math-video-generator' ? 5 : 4).map((tag) => <span key={tag} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800/80 text-neutral-500 dark:text-neutral-400">{tag}</span>)}
                 </div>
                 {project.url ? <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-neutral-900 dark:text-white hover:underline"><span>Visit project</span><ExternalLink className="w-3.5 h-3.5" /></a> : <span className="text-xs font-medium text-neutral-400 dark:text-neutral-500">In development</span>}
               </div>

@@ -28,7 +28,7 @@ export const Hero: React.FC = () => {
 
         <div className="p-4 sm:p-5 rounded-xl bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800/80 max-w-3xl">
           <div className="flex items-start gap-3">
-            <Sparkles className="w-4 h-4 mt-0.5 shrink-0 text-neutral-700 dark:text-neutral-300" />
+            <Sparkles className="w-4 h-4 mt-1 shrink-0 text-neutral-700 dark:text-neutral-300" />
             <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
               One person, many tools. I use AI-assisted workflows where they improve speed or clarity, while remaining responsible for the decisions, implementation, review, testing, and final delivery.
             </p>

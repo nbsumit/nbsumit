@@ -26,6 +26,18 @@ export const App: React.FC = () => {
   }, [darkMode]);
 
   useEffect(() => {
+    const handleCommandShortcut = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        setCommandOpen((open) => !open);
+      }
+    };
+
+    window.addEventListener('keydown', handleCommandShortcut);
+    return () => window.removeEventListener('keydown', handleCommandShortcut);
+  }, []);
+
+  useEffect(() => {
     const titles: Record<string, string> = {
       capabilities: 'nbsumit | Capabilities',
       ecosystem: 'nbsumit | Work',

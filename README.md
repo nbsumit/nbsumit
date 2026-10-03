@@ -1,22 +1,22 @@
-# nbsumit.com
+# Hi, I'm Sumit Sengar
 
-[nbsumit.com](https://nbsumit.com) is the professional home of Sumit Sengar, an independent multidisciplinary builder.
+I'm an independent multidisciplinary builder working across software, geospatial technology, design, data, automation, and technical communication.
 
-The site brings together work across:
+I like turning ideas into useful, working products and practical workflows. I use AI-assisted tools where they genuinely improve speed or clarity, while keeping responsibility for decisions, quality, testing, and final delivery.
+
+## What I work on
 
 - Web and software
-- Design and visual systems
 - GIS and geospatial workflows
-- Documents and technical communication
+- Design and visual systems
 - Data and automation
+- Technical documents and communication
 - AI-assisted prototyping and production
 
-## Approach
+## Portfolio
 
-One person, many tools.
-
-AI is used where it improves research, iteration, coding, or production speed, while final responsibility for decisions, implementation, review, testing, and delivery remains human-owned.
+[nbsumit.com](https://nbsumit.com)
 
 ## Contact
 
-Email only: [hello@nbsumit.com](mailto:hello@nbsumit.com)
+Email: [hello@nbsumit.com](mailto:hello@nbsumit.com)
