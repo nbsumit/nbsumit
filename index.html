@@ -3,39 +3,109 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nbsumit | Independent Multidisciplinary Builder</title>
-    <meta name="description" content="Sumit Sengar is an independent multidisciplinary builder working across software, design, GIS, data, automation, and technical communication." />
+    <title>nbsumit | Sumit Sengar - Independent Developer &amp; Creator</title>
+    <meta
+      name="description"
+      content="Independent developer and builder creating software, web applications, GIS data tools, and educational products. I build useful things for the internet."
+    />
     <meta name="author" content="Sumit Sengar" />
-    <meta name="keywords" content="Sumit Sengar, nbsumit, software, web development, UI UX, Figma, Adobe, GIS, geospatial, QGIS, Google Earth Engine, Python, automation" />
-    <link rel="canonical" href="https://nbsumit.com" />
+    <meta
+      name="keywords"
+      content="Sumit Sengar, nbsumit, independent developer, software engineer, web developer, GIS, geospatial, TypeScript, React, SvelteKit, Python, automation"
+    />
+    <link rel="canonical" href="https://nbsumit.com/" />
 
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nbsumit.com" />
-    <meta property="og:title" content="nbsumit | Independent Multidisciplinary Builder" />
-    <meta property="og:description" content="Software, design, GIS, data, automation, and technical communication by Sumit Sengar." />
+    <meta property="og:url" content="https://nbsumit.com/" />
+    <meta property="og:title" content="nbsumit | Sumit Sengar - Independent Developer &amp; Creator" />
+    <meta
+      property="og:description"
+      content="I build useful things for the internet. Software, web applications, GIS data tools, and educational products."
+    />
     <meta property="og:site_name" content="nbsumit.com" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://nbsumit.com/android-chrome-512x512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="NB brand mark - Sumit Sengar" />
 
-    <link rel="icon" type="image/png" sizes="192x192" href="/nb-brand.png?v=20260921-2" />
-    <link rel="apple-touch-icon" href="/nb-brand.png?v=20260921-2" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@nbsumit" />
+    <meta name="twitter:creator" content="@nbsumit" />
+    <meta name="twitter:title" content="nbsumit | Sumit Sengar - Independent Developer &amp; Creator" />
+    <meta
+      name="twitter:description"
+      content="I build useful things for the internet. Software, web applications, GIS data tools, and educational products."
+    />
+    <meta name="twitter:image" content="https://nbsumit.com/android-chrome-512x512.png" />
+
+    <!-- Favicons & Manifest -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0a0a0a" />
 
+    <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+
+    <!-- Schema.org JSON-LD structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://nbsumit.com/#person",
+            "name": "Sumit Sengar",
+            "alternateName": "nbsumit",
+            "url": "https://nbsumit.com/",
+            "jobTitle": "Independent Developer and Creator",
+            "email": "hello@nbsumit.com",
+            "image": "https://nbsumit.com/android-chrome-512x512.png",
+            "sameAs": [
+              "https://github.com/nbsumit",
+              "https://www.linkedin.com/in/nbsumit",
+              "https://x.com/nbsumit",
+              "https://www.instagram.com/nbsumit",
+              "https://www.youtube.com/@nbsumit"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://nbsumit.com/#website",
+            "url": "https://nbsumit.com/",
+            "name": "nbsumit.com",
+            "description": "Personal brand and portfolio of Sumit Sengar (nbsumit)",
+            "publisher": {
+              "@id": "https://nbsumit.com/#person"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Theme initialization (prevents flash of incorrect theme) -->
     <script>
       (function() {
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
       })();
     </script>
 
-    <script type="module" crossorigin src="/assets/index-D2GbPaEA.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ufXBT2Q5.css">
+    <script type="module" crossorigin src="/assets/index-DwyrNKtw.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Cl4TWEL3.css">
   </head>
-  <body class="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+  <body class="min-h-screen bg-[#fafaf9] dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100 antialiased selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-900">
     <div id="root"></div>
   </body>
 </html>

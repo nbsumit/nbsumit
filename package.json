@@ -9,7 +9,8 @@
     "prebuild": "node scripts/prebuild.cjs",
     "build": "tsc -b && vite build",
     "postbuild": "node scripts/postbuild.cjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node scripts/test-site.cjs"
   },
   "dependencies": {
     "lucide-react": "^1.16.0",

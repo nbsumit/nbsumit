@@ -55,11 +55,14 @@ for (const file of rootIconFiles) {
 }
 console.log('✓ Synced standard root favicon files');
 
-// 4. Copy dist/site.webmanifest to root
-const manifestSrc = path.join(distDir, 'site.webmanifest');
-if (fs.existsSync(manifestSrc)) {
-  fs.copyFileSync(manifestSrc, path.join(rootDir, 'site.webmanifest'));
-  console.log('✓ Synced dist/site.webmanifest -> ./site.webmanifest');
+// 4. Copy dist/site.webmanifest, robots.txt, sitemap.xml to root
+const rootMetaFiles = ['site.webmanifest', 'robots.txt', 'sitemap.xml'];
+for (const file of rootMetaFiles) {
+  const src = path.join(distDir, file);
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, path.join(rootDir, file));
+    console.log(`✓ Synced dist/${file} -> ./${file}`);
+  }
 }
 
 // 5. Ensure .nojekyll exists in root

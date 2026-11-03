@@ -1,10 +1,6 @@
 /**
  * Centralized Social Links Configuration for nbsumit.com
- * 
- * IMPORTANT:
- * Update your actual profile URLs below in ONE place.
- * All components across the website (Navbar, Footer, About, Contact, Command Palette)
- * dynamically read from this single source of truth.
+ * Brand handle: @nbsumit across all verified platforms
  */
 
 export interface SocialLinkItem {
@@ -23,7 +19,7 @@ export const SOCIAL_LINKS: Record<'github' | 'linkedin' | 'x' | 'instagram' | 'y
     url: 'https://github.com/nbsumit',
     placeholder: false,
     username: '@nbsumit',
-    description: 'Open source repositories, tools, and research experiments',
+    description: 'Open-source repositories, developer tools, and code experiments',
   },
   linkedin: {
     id: 'linkedin',
@@ -31,15 +27,15 @@ export const SOCIAL_LINKS: Record<'github' | 'linkedin' | 'x' | 'instagram' | 'y
     url: 'https://www.linkedin.com/in/nbsumit',
     placeholder: false,
     username: '@nbsumit',
-    description: 'Professional background, engineering network, and updates',
+    description: 'Professional background, engineering network, and career updates',
   },
   x: {
     id: 'x',
-    name: 'X (Twitter)',
+    name: 'X',
     url: 'https://x.com/nbsumit',
     placeholder: false,
     username: '@nbsumit',
-    description: 'Thoughts on software engineering, computational tools, and building',
+    description: 'Thoughts on software craftsmanship, tools, and indie building',
   },
   instagram: {
     id: 'instagram',
@@ -55,20 +51,14 @@ export const SOCIAL_LINKS: Record<'github' | 'linkedin' | 'x' | 'instagram' | 'y
     url: 'https://www.youtube.com/@nbsumit',
     placeholder: false,
     username: '@nbsumit',
-    description: 'Educational software demos, computational visuals, and walkthroughs',
+    description: 'Technical walkthroughs, software demos, and educational visuals',
   },
 };
 
-/**
- * Returns an array of all social links for iterations in UI components.
- */
 export const getAllSocialLinks = (): SocialLinkItem[] => {
   return Object.values(SOCIAL_LINKS);
 };
 
-/**
- * Helper to check if a social link is an active user link or a placeholder.
- */
 export const isConfiguredSocial = (link: SocialLinkItem): boolean => {
   return !link.placeholder && !link.url.includes('YOUR_');
 };
