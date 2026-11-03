@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>nbsumit | Sumit Sengar - Independent Developer &amp; Creator</title>
-    <meta
-      name="description"
-      content="Independent developer and builder creating software, web applications, GIS data tools, and educational products. I build useful things for the internet."
-    />
+    <title>nbsumit</title>
+    <meta name="description" content="nbsumit" />
     <meta name="author" content="Sumit Sengar" />
-    <meta
-      name="keywords"
-      content="Sumit Sengar, nbsumit, independent developer, software engineer, web developer, GIS, geospatial, TypeScript, React, SvelteKit, Python, automation"
-    />
     <link rel="canonical" href="https://nbsumit.com/" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nbsumit.com/" />
-    <meta property="og:title" content="nbsumit | Sumit Sengar - Independent Developer &amp; Creator" />
-    <meta
-      property="og:description"
-      content="I build useful things for the internet. Software, web applications, GIS data tools, and educational products."
-    />
+    <meta property="og:title" content="nbsumit" />
+    <meta property="og:description" content="nbsumit" />
     <meta property="og:site_name" content="nbsumit.com" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content="https://nbsumit.com/android-chrome-512x512.png" />
-    <meta property="og:image:width" content="512" />
-    <meta property="og:image:height" content="512" />
-    <meta property="og:image:alt" content="NB brand mark - Sumit Sengar" />
+    <meta property="og:image" content="https://nbsumit.com/nb-brand.png" />
 
-    <!-- Twitter / X -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@nbsumit" />
-    <meta name="twitter:creator" content="@nbsumit" />
-    <meta name="twitter:title" content="nbsumit | Sumit Sengar - Independent Developer &amp; Creator" />
-    <meta
-      name="twitter:description"
-      content="I build useful things for the internet. Software, web applications, GIS data tools, and educational products."
-    />
-    <meta name="twitter:image" content="https://nbsumit.com/android-chrome-512x512.png" />
+    <meta name="twitter:title" content="nbsumit" />
+    <meta name="twitter:description" content="nbsumit" />
+    <meta name="twitter:image" content="https://nbsumit.com/nb-brand.png" />
 
     <!-- Favicons & Manifest -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -48,64 +30,31 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#09090b" />
 
-    <!-- Schema.org JSON-LD structured data -->
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "https://nbsumit.com/#person",
-            "name": "Sumit Sengar",
-            "alternateName": "nbsumit",
-            "url": "https://nbsumit.com/",
-            "jobTitle": "Independent Developer and Creator",
-            "email": "hello@nbsumit.com",
-            "image": "https://nbsumit.com/android-chrome-512x512.png",
-            "sameAs": [
-              "https://github.com/nbsumit",
-              "https://www.linkedin.com/in/nbsumit",
-              "https://x.com/nbsumit",
-              "https://www.instagram.com/nbsumit",
-              "https://www.youtube.com/@nbsumit"
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://nbsumit.com/#website",
-            "url": "https://nbsumit.com/",
-            "name": "nbsumit.com",
-            "description": "Personal brand and portfolio of Sumit Sengar (nbsumit)",
-            "publisher": {
-              "@id": "https://nbsumit.com/#person"
-            }
-          }
-        ]
+        "@type": "Person",
+        "name": "Sumit Sengar",
+        "alternateName": "nbsumit",
+        "url": "https://nbsumit.com/",
+        "image": "https://nbsumit.com/nb-brand.png"
       }
     </script>
-
-    <!-- Theme initialization (prevents flash of incorrect theme) -->
-    <script>
-      (function() {
-        try {
-          const savedTheme = localStorage.getItem('theme');
-          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
-            document.documentElement.classList.add('dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-          }
-        } catch (e) {}
-      })();
-    </script>
-
-    <script type="module" crossorigin src="/assets/index-DwyrNKtw.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cl4TWEL3.css">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #09090B;
+        overflow: hidden;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-D8PjOwjL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D6tQGo2o.css">
   </head>
-  <body class="min-h-screen bg-[#fafaf9] dark:bg-[#09090b] text-neutral-900 dark:text-neutral-100 antialiased selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-900">
+  <body class="bg-[#09090B] overflow-hidden select-none m-0 p-0">
     <div id="root"></div>
   </body>
 </html>

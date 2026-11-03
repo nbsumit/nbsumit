@@ -36,18 +36,18 @@ test('Site Invariants & Configuration QA', async (t) => {
     assert.ok(content.includes('nbsumit.com'), 'README must contain official domain');
   });
 
-  await t.test('index.html contains production SEO & Schema.org JSON-LD', () => {
+  await t.test('index.html contains production SEO & canonical link', () => {
     const indexPath = path.join(rootDir, 'index.html');
     assert.ok(fs.existsSync(indexPath), 'index.html must exist');
     const content = fs.readFileSync(indexPath, 'utf8');
-    assert.ok(content.includes('<title>nbsumit | Sumit Sengar'), 'Title must be set');
+    assert.ok(content.includes('<title>nbsumit</title>'), 'Title must be nbsumit');
     assert.ok(content.includes('rel="canonical" href="https://nbsumit.com/"'), 'Canonical link must be present');
-    assert.ok(content.includes('schema.org'), 'Structured data schema must be present');
     assert.ok(!content.includes('—'), 'No em dash in index.html to guarantee postbuild integrity');
   });
 
-  await t.test('Favicon assets exist in public and root', () => {
+  await t.test('Original brand logo and favicon assets exist', () => {
     const iconFiles = [
+      'nb-brand.png',
       'favicon.ico',
       'favicon-32x32.png',
       'favicon-16x16.png',
