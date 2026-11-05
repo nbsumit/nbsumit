@@ -55,6 +55,24 @@ for (const file of rootIconFiles) {
 }
 console.log('✓ Synced standard root favicon files');
 
+const publicFonts = path.join(rootDir, 'public', 'fonts');
+const rootFonts = path.join(rootDir, 'fonts');
+if (fs.existsSync(publicFonts)) {
+  if (fs.existsSync(rootFonts)) {
+    fs.rmSync(rootFonts, { recursive: true, force: true });
+  }
+  fs.cpSync(publicFonts, rootFonts, { recursive: true });
+  console.log('✓ Synced ./public/fonts -> ./fonts');
+}
+
+const markSrc = path.join(distDir, 'nb-mark.png');
+if (!fs.existsSync(markSrc)) {
+  console.error('Error: missing production asset nb-mark.png');
+  process.exit(1);
+}
+fs.copyFileSync(markSrc, path.join(rootDir, 'nb-mark.png'));
+console.log('✓ Synced dist/nb-mark.png -> ./nb-mark.png');
+
 // 4. Copy dist/site.webmanifest, robots.txt, sitemap.xml to root
 const rootMetaFiles = ['site.webmanifest', 'robots.txt', 'sitemap.xml'];
 for (const file of rootMetaFiles) {

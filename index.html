@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>nbsumit</title>
-    <meta name="description" content="nbsumit" />
+    <meta name="description" content="Coming soon" />
     <meta name="author" content="Sumit Sengar" />
     <link rel="canonical" href="https://nbsumit.com/" />
+    <meta name="color-scheme" content="dark" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nbsumit.com/" />
     <meta property="og:title" content="nbsumit" />
-    <meta property="og:description" content="nbsumit" />
+    <meta property="og:description" content="Coming soon" />
     <meta property="og:site_name" content="nbsumit.com" />
     <meta property="og:image" content="https://nbsumit.com/nb-brand.png" />
 
@@ -20,7 +21,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@nbsumit" />
     <meta name="twitter:title" content="nbsumit" />
-    <meta name="twitter:description" content="nbsumit" />
+    <meta name="twitter:description" content="Coming soon" />
     <meta name="twitter:image" content="https://nbsumit.com/nb-brand.png" />
 
     <!-- Favicons & Manifest -->
@@ -30,7 +31,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="preload" href="/nb-mark.png" as="image" />
+    <link rel="preload" href="/fonts/barlow-300.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -47,14 +51,22 @@
       html, body {
         margin: 0;
         padding: 0;
-        background-color: #09090B;
+        background-color: #000000;
         overflow: hidden;
       }
+      .logo, .soon, .limb, .starfield, .orbit, .halo {
+        opacity: 0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .logo, .soon, .limb, .starfield, .orbit, .halo {
+          opacity: 1;
+        }
+      }
     </style>
-    <script type="module" crossorigin src="/assets/index-D8PjOwjL.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D6tQGo2o.css">
+    <script type="module" crossorigin src="/assets/index-Dyu_-skn.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C-Eu3ksI.css">
   </head>
-  <body class="bg-[#09090B] overflow-hidden select-none m-0 p-0">
+  <body>
     <div id="root"></div>
   </body>
 </html>
