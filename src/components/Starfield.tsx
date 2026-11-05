@@ -5,10 +5,7 @@ type Star = {
   y: number;
   r: number;
   a: number;
-  phase: number;
   drift: number;
-  cool: boolean;
-  glow: boolean;
 };
 
 function prefersReducedMotion(): boolean {
@@ -44,53 +41,33 @@ export function Starfield() {
     };
 
     const seed = () => {
-      const count = Math.max(56, Math.min(150, Math.round((width * height) / 22000)));
+      const count = Math.max(36, Math.min(72, Math.round((width * height) / 48000)));
       stars = Array.from({ length: count }, () => {
-        const glow = Math.random() < 0.045;
-        const bright = glow || Math.random() < 0.06;
+        const bright = Math.random() < 0.06;
         return {
           x: Math.random(),
           y: Math.random(),
-          r: glow ? 1.15 + Math.random() * 0.45 : bright ? 0.9 : 0.3 + Math.random() * 0.65,
-          a: bright ? 0.72 + Math.random() * 0.28 : 0.16 + Math.random() * 0.38,
-          phase: Math.random() * Math.PI * 2,
-          drift: 0.45 + Math.random() * 1.15,
-          cool: Math.random() < 0.18,
-          glow,
+          r: bright ? 0.9 + Math.random() * 0.25 : 0.25 + Math.random() * 0.45,
+          a: bright ? 0.42 + Math.random() * 0.22 : 0.08 + Math.random() * 0.2,
+          drift: 0.35 + Math.random() * 0.8,
         };
       });
     };
 
     const draw = (time: number) => {
       ctx.clearRect(0, 0, width, height);
-      const reduce = motion.matches;
-      const driftT = reduce ? 0 : time * 0.0000032;
+      const driftT = motion.matches ? 0 : time * 0.00000085;
 
       for (const star of stars) {
-        const x = ((star.x + driftT * star.drift * 0.22) % 1) * width;
+        const x = ((star.x + driftT * star.drift * 0.15) % 1) * width;
         const y = ((star.y + driftT * star.drift) % 1) * height;
-        const twinkle = reduce || !star.glow ? 1 : 0.78 + 0.22 * Math.sin(time * 0.00045 + star.phase);
-        const alpha = star.a * twinkle;
-        const color = star.cool ? '198, 216, 234' : '238, 243, 248';
-
-        if (star.glow) {
-          const glow = ctx.createRadialGradient(x, y, 0, x, y, star.r * 7);
-          glow.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
-          glow.addColorStop(0.35, `rgba(${color}, ${alpha * 0.35})`);
-          glow.addColorStop(1, `rgba(${color}, 0)`);
-          ctx.fillStyle = glow;
-          ctx.beginPath();
-          ctx.arc(x, y, star.r * 7, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.fillStyle = `rgba(${color}, ${alpha})`;
+        ctx.fillStyle = `rgba(236, 240, 244, ${star.a})`;
         ctx.beginPath();
         ctx.arc(x, y, star.r, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      if (!reduce && running) {
+      if (!motion.matches && running) {
         raf = requestAnimationFrame(draw);
       }
     };
@@ -99,7 +76,7 @@ export function Starfield() {
       cancelAnimationFrame(raf);
       const nextW = window.innerWidth;
       const nextH = window.innerHeight;
-      const reshuffle = stars.length === 0 || Math.abs(nextW - seededW) > 64 || Math.abs(nextH - seededH) > 140;
+      const reshuffle = stars.length === 0 || Math.abs(nextW - seededW) > 80 || Math.abs(nextH - seededH) > 160;
       resize();
       if (reshuffle) {
         seed();
