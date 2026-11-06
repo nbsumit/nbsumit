@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>nbsumit</title>
-    <meta name="description" content="nbsumit" />
+    <meta name="description" content="nbsumit. Sumit Sengar." />
     <meta name="author" content="Sumit Sengar" />
     <link rel="canonical" href="https://nbsumit.com/" />
     <meta name="color-scheme" content="dark" />
@@ -32,9 +32,7 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <meta name="theme-color" content="#000000" />
-    <link rel="preload" href="/nb-mark.png" as="image" />
     <link rel="preload" href="/fonts/barlow-300.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -54,16 +52,20 @@
         background-color: #000000;
         overflow: hidden;
       }
-      .mark { opacity: 0; }
-      @media (prefers-reduced-motion: reduce) {
-        .mark { opacity: 1; }
+      .nojs {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
       }
+      .nojs img { width: 180px; height: 180px; }
     </style>
 
-    <script type="module" crossorigin src="/assets/index-BjZqH6K6.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cez72JMZ.css">
+    <script type="module" crossorigin src="/assets/index-GmmmurfL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DBaNCj0q.css">
   </head>
   <body>
     <div id="root"></div>
+    <noscript><div class="nojs"><img src="/nb-mark.png" alt="nb" /></div></noscript>
   </body>
 </html>
