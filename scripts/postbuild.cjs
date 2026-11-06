@@ -74,7 +74,7 @@ fs.copyFileSync(markSrc, path.join(rootDir, 'nb-mark.png'));
 console.log('✓ Synced dist/nb-mark.png -> ./nb-mark.png');
 
 // 4. Copy dist/site.webmanifest, robots.txt, sitemap.xml to root
-const rootMetaFiles = ['site.webmanifest', 'robots.txt', 'sitemap.xml'];
+const rootMetaFiles = ['site.webmanifest', 'robots.txt', 'sitemap.xml', 'og.jpg'];
 for (const file of rootMetaFiles) {
   const src = path.join(distDir, file);
   if (fs.existsSync(src)) {
