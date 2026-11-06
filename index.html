@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>nbsumit</title>
     <meta name="description" content="nbsumit. Sumit Sengar." />
     <meta name="author" content="Sumit Sengar" />
@@ -55,20 +55,49 @@
         background-color: #000000;
         overflow: hidden;
       }
+      @font-face {
+        font-family: 'Barlow';
+        font-style: normal;
+        font-weight: 300;
+        font-display: swap;
+        src: url('/fonts/barlow-300.woff2') format('woff2');
+      }
+      /* Painted before the bundle runs; React replaces it with the live ring. */
+      .pre {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font: 300 clamp(12px, 1.5vmin, 15px) 'Barlow', system-ui, sans-serif;
+        letter-spacing: 0.42em;
+        text-indent: 0.42em;
+        color: rgba(236, 240, 246, 0.82);
+      }
+      .pre-ring {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: min(calc(clamp(150px, 32vmin, 310px) * 1.95), calc(100vw - 40px));
+        height: min(calc(clamp(150px, 32vmin, 310px) * 1.95), calc(100vw - 40px));
+        translate: -50% -50%;
+        border-radius: 50%;
+        border: 1.5px solid rgba(236, 240, 246, 0.12);
+      }
       .nojs {
         position: fixed;
         inset: 0;
         display: grid;
         place-items: center;
+        background: #000;
       }
       .nojs img { width: 180px; height: 180px; }
     </style>
 
-    <script type="module" crossorigin src="/assets/index-BAYBD8Gx.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DUrA1lI9.css">
+    <script type="module" crossorigin src="/assets/index-it36zlig.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D8O9nnmo.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><div class="pre" aria-hidden="true"><span class="pre-ring"></span><span>000</span></div></div>
     <noscript><div class="nojs"><img src="/nb-mark.png" alt="nb" /></div></noscript>
   </body>
 </html>

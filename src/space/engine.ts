@@ -71,19 +71,24 @@ export type SpaceEngine = {
   focus: (near: number) => void;
   /** Leave a little stardust at a screen point. */
   trail: (x: number, y: number) => void;
-  /** Scatter a handful of sparks at a screen point. */
-  burst: (x: number, y: number, count?: number) => void;
+  /** Scatter sparks at a screen point. Touch sparks are bigger. */
+  burst: (x: number, y: number, touch?: boolean) => void;
   destroy: () => void;
 };
 
 type Options = {
   reducedMotion: boolean;
   onFrame?: (info: FrameInfo) => void;
+  /** Called when the engine steps quality down: 0 full, 1 lighter, 2 lightest. */
+  onQuality?: (level: number) => void;
 };
 
 const CRUISE = 0.03;
 const LIGHTSPEED = 1.7;
 const SKY_SEED = 0x5eed;
+/** The deep sky is generated on a fixed field around the viewport centre, so
+ *  the same stars sit in the same places whatever the window size. */
+const FIELD = 2400;
 const TINTS = [
   [236, 240, 246],
   [176, 198, 255],
@@ -105,6 +110,8 @@ function mulberry32(seed: number) {
 }
 
 const rgba = (c: readonly number[], a: number) => `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`;
+const rgb = (r: number, g: number, b: number, a: number) =>
+  `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},${a.toFixed(3)})`;
 
 /** A bright star with a soft glow and diffraction spikes, pre-rendered once. */
 function makeHeroSprite(size: number, tint: readonly number[], diagonals: boolean, dpr: number) {
@@ -196,15 +203,17 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
   let last = performance.now();
   let raf = 0;
   let alive = true;
+  let dprQuery: MediaQueryList | null = null;
 
-  // Adaptive quality: thin the field if frames are consistently slow at cruise.
+  // Adaptive quality: step down if frames are consistently slow at cruise.
+  // The caller drops its expensive layers; we also thin the field a little.
   let baseCount = 0;
   let level = 0;
   let frameEma = 16;
   let probe = 0;
   const applyQuality = () => {
-    const factor = [1, 0.62, 0.38][level];
-    const count = Math.max(90, Math.round(baseCount * factor));
+    const factor = [1, 0.75, 0.5][level];
+    const count = Math.max(110, Math.round(baseCount * factor));
     if (stars.length > count) stars.length = count;
     while (stars.length < count) {
       const star = {} as Star;
@@ -251,49 +260,56 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
     deepCtx.fillRect(-diag, -sigma * 2.2, diag * 2, sigma * 4.4);
     deepCtx.restore();
 
-    const count = Math.round((dw * dh) / 2200);
+    // Dust tier: positions on the fixed field, drawn where they land on screen.
+    const field = Math.max(FIELD, dw, dh);
+    const count = Math.round((field * field) / 2200);
+    const minDot = dpr >= 2 ? 0.6 : 1;
     for (let i = 0; i < count; i++) {
-      const x = rand() * dw;
-      const y = rand() * dh;
+      const x = dw / 2 + (rand() - 0.5) * field;
+      const y = dh / 2 + (rand() - 0.5) * field;
+      const roll = rand();
+      const tintRoll = rand();
+      const bright = rand();
+      const big = rand();
+      if (x < 0 || y < 0 || x > dw || y > dh) continue;
       const inBand = Math.exp(-((bandAt(x, y) / sigma) ** 2));
-      if (rand() > 0.28 + 0.72 * inBand) continue;
-      const tint = TINTS[rand() < 0.15 ? 1 : rand() < 0.08 ? 2 : 0];
-      const a = 0.07 + rand() ** 3 * (0.45 + inBand * 0.2);
+      if (roll > 0.28 + 0.72 * inBand) continue;
+      const tint = TINTS[tintRoll < 0.15 ? 1 : tintRoll < 0.23 ? 2 : 0];
+      const a = 0.07 + bright ** 3 * (0.45 + inBand * 0.2);
       deepCtx.fillStyle = rgba(tint, a);
-      const s = rand() < 0.96 ? 0.6 : 1.1;
+      const s = big < 0.96 ? minDot : 1.3;
       deepCtx.fillRect(x, y, s, s);
     }
 
-    // Hero stars: a handful of bright ones, kept clear of the mark.
+    // Hero stars: a handful of bright ones, kept clear of the mark. Candidates
+    // come in a fixed order so a resize keeps the same stars where they were.
     heroes = [];
     const clear = Math.min(w, h) * 0.46;
-    let tries = 0;
-    while (heroes.length < 9 && tries++ < 200) {
-      const x = PAD + rand() * w;
-      const y = PAD + rand() * h;
+    for (let i = 0; i < 160 && heroes.length < 9; i++) {
+      const x = dw / 2 + (rand() - 0.5) * field;
+      const y = dh / 2 + (rand() - 0.5) * field;
+      const sizeRoll = rand();
+      const roll = rand();
+      const phase = rand() * Math.PI * 2;
+      const rate = 0.25 + rand() * 0.5;
+      if (x < PAD + 20 || y < PAD + 20 || x > dw - PAD - 20 || y > dh - PAD - 20) continue;
       if (Math.hypot(x - dw / 2, y - dh / 2) < clear) continue;
       if (heroes.some((o) => Math.hypot(o.x - x, o.y - y) < Math.min(w, h) * 0.18)) continue;
       const big = heroes.length < 2;
-      const size = big ? 46 + rand() * 18 : 22 + rand() * 16;
-      const roll = rand();
+      const size = big ? 46 + sizeRoll * 18 : 22 + sizeRoll * 16;
       const tint = roll < 0.45 ? TINTS[0] : roll < 0.85 ? ICE : TINTS[2];
-      heroes.push({
-        x,
-        y,
-        sprite: makeHeroSprite(size, tint, big, dpr),
-        phase: rand() * Math.PI * 2,
-        rate: 0.25 + rand() * 0.5,
-      });
+      heroes.push({ x, y, sprite: makeHeroSprite(size, tint, big, dpr), phase, rate });
     }
   };
 
   const resize = () => {
     const nextW = window.innerWidth;
     const nextH = window.innerHeight;
-    if (nextW === w && nextH === h) return;
+    const nextDpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (nextW === w && nextH === h && nextDpr === dpr) return;
     w = nextW;
     h = nextH;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = nextDpr;
     canvas.width = Math.floor(w * dpr);
     canvas.height = Math.floor(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -301,6 +317,10 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
     baseCount = Math.max(170, Math.min(640, Math.round((w * h) / 3300)));
     applyQuality();
     paintDeep();
+    // Catch a move to a screen with a different pixel ratio.
+    dprQuery?.removeEventListener('change', resize);
+    dprQuery = window.matchMedia(`(resolution: ${window.devicePixelRatio || 1}dppx)`);
+    dprQuery.addEventListener('change', resize);
     if (opts.reducedMotion) wake();
   };
 
@@ -347,7 +367,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
     const warp = Math.min(1, intensity);
     opts.onFrame?.({ px, py, warp, charge, near });
 
-    // Thin the field on slow devices, measured only while cruising.
+    // Measure only while cruising, and only step down.
     if (arrived && warp < 0.05 && !holding && level < 2 && dtMs < 100) {
       frameEma += (dtMs - frameEma) * 0.04;
       probe += dt;
@@ -356,6 +376,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
         probe = 0;
         frameEma = 16;
         applyQuality();
+        opts.onQuality?.(level);
       }
     }
 
@@ -377,6 +398,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
     const f = focal * (1 - 0.1 * Math.min(1.4, intensity));
     const trail = 0.012 + warp * 0.05;
     const shift = warp * 0.55;
+    const steady = Math.min(1, warp / 0.2);
     const edgeScale = 1 / (0.5 * Math.max(w, h));
     ctx.lineCap = 'round';
 
@@ -391,19 +413,21 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
       const depth = 1 - s.z;
       sx -= px * 26 * depth;
       sy -= py * 26 * depth;
-      let tint: readonly number[] = TINTS[s.tint];
+      const base = TINTS[s.tint];
+      let cr = base[0];
+      let cg = base[1];
+      let cb = base[2];
       if (shift > 0.02) {
         // Doppler: the centre blue-shifts, the edges warm, as we approach lightspeed.
         const edge = Math.min(1, Math.hypot(sx - cx, sy - cy) * edgeScale);
         const to = edge < 0.4 ? ICE : EMBER;
-        tint = [
-          tint[0] + (to[0] - tint[0]) * shift,
-          tint[1] + (to[1] - tint[1]) * shift,
-          tint[2] + (to[2] - tint[2]) * shift,
-        ].map(Math.round);
+        cr += (to[0] - cr) * shift;
+        cg += (to[1] - cg) * shift;
+        cb += (to[2] - cb) * shift;
       }
+      // Twinkle fades out smoothly as the streaks take over.
       const twinkle = 0.72 + 0.28 * Math.sin(t * s.rate + s.phase);
-      const alpha = Math.min(1, 0.1 + depth * depth * 1.4) * (warp > 0.2 ? 1 : twinkle);
+      const alpha = Math.min(1, 0.1 + depth * depth * 1.4) * (twinkle + (1 - twinkle) * steady);
       const r = s.size * (0.35 + depth * 1.5);
 
       const bz = s.z + speed * trail;
@@ -413,18 +437,18 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
       const dy = sy - by;
 
       if (dx * dx + dy * dy > r * r * 4) {
-        ctx.strokeStyle = rgba(tint, alpha * 0.45);
+        ctx.strokeStyle = rgb(cr, cg, cb, alpha * 0.45);
         ctx.lineWidth = Math.max(0.6, r * 1.3);
         ctx.beginPath();
         ctx.moveTo(bx, by);
         ctx.lineTo(sx, sy);
         ctx.stroke();
-        ctx.fillStyle = rgba(tint, alpha);
+        ctx.fillStyle = rgb(cr, cg, cb, alpha);
         ctx.beginPath();
         ctx.arc(sx, sy, Math.max(0.5, r * 0.8), 0, Math.PI * 2);
         ctx.fill();
       } else {
-        ctx.fillStyle = rgba(tint, alpha);
+        ctx.fillStyle = rgb(cr, cg, cb, alpha);
         if (r < 0.9) {
           ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
         } else {
@@ -518,18 +542,18 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
     }
   };
 
-  const addMote = (x: number, y: number, spread: number) => {
-    if (motes.length > 220) motes.shift();
+  const addMote = (x: number, y: number, spread: number, size: number, offset = 0) => {
+    if (motes.length > 260) motes.shift();
     const a = Math.random() * Math.PI * 2;
-    const v = Math.random() * spread;
+    const v = (0.3 + Math.random() * 0.7) * spread;
     motes.push({
-      x,
-      y,
+      x: x + Math.cos(a) * offset,
+      y: y + Math.sin(a) * offset,
       vx: Math.cos(a) * v,
       vy: Math.sin(a) * v,
       life: 0,
       max: 0.6 + Math.random() * 0.8,
-      r: 0.5 + Math.random() * 1.1,
+      r: size * (0.6 + Math.random() * 0.8),
       tint: Math.random() < 0.4 ? 1 : 0,
     });
   };
@@ -579,13 +603,14 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
     },
     trail(x, y) {
       if (opts.reducedMotion) return;
-      addMote(x, y, 24);
-      if (Math.random() < 0.5) addMote(x, y, 40);
+      addMote(x, y, 36, 1.4);
+      if (Math.random() < 0.5) addMote(x, y, 60, 1.1);
       wake();
     },
-    burst(x, y, count = 18) {
+    burst(x, y, touch = false) {
       if (opts.reducedMotion) return;
-      for (let i = 0; i < count; i++) addMote(x, y, 90 + Math.random() * 120);
+      const n = touch ? 28 : 16;
+      for (let i = 0; i < n; i++) addMote(x, y, touch ? 220 : 150, touch ? 2 : 1.5, touch ? 14 : 4);
       wake();
     },
     destroy() {
@@ -593,6 +618,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVisibility);
+      dprQuery?.removeEventListener('change', resize);
     },
   };
 }

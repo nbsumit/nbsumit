@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react';
 import { createSpace, type SpaceEngine } from './space/engine';
 
-const NB =
-  'M1020 984 c0 -415 0 -415 48 -437 56 -25 214 -35 278 -18 53 14 117 57 149 101 76 103 77 345 1 460 -53 80 -198 112 -293 64 -23 -12 -45 -19 -48 -16 -3 3 -5 63 -5 134 0 128 0 128 -65 128 l-65 0 0 -416z m340 48 c78 -58 78 -282 0 -357 -35 -33 -146 -48 -189 -26 -33 18 -32 265 2 331 38 77 122 100 187 52z M583 1166 c-22 -7 -54 -23 -71 -34 -31 -23 -42 -20 -42 10 0 15 -8 18 -50 18 -50 0 -50 0 -50 -315 l0 -315 65 0 65 0 0 220 c0 219 0 219 31 255 57 65 149 71 193 12 20 -27 21 -43 24 -258 3 -229 3 -229 68 -229 l64 0 0 239 c0 294 -12 340 -103 387 -40 21 -144 27 -194 10z';
+// The mark, as three strokes: the bowl of the b, its counter, and the n.
+const B_OUTER =
+  'M1020 984 c0 -415 0 -415 48 -437 56 -25 214 -35 278 -18 53 14 117 57 149 101 76 103 77 345 1 460 -53 80 -198 112 -293 64 -23 -12 -45 -19 -48 -16 -3 3 -5 63 -5 134 0 128 0 128 -65 128 l-65 0 0 -416z';
+const B_COUNTER = 'M1360 1032 c78 -58 78 -282 0 -357 -35 -33 -146 -48 -189 -26 -33 18 -32 265 2 331 38 77 122 100 187 52z';
+const N =
+  'M583 1166 c-22 -7 -54 -23 -71 -34 -31 -23 -42 -20 -42 10 0 15 -8 18 -50 18 -50 0 -50 0 -50 -315 l0 -315 65 0 65 0 0 220 c0 219 0 219 31 255 57 65 149 71 193 12 20 -27 21 -43 24 -258 3 -229 3 -229 68 -229 l64 0 0 239 c0 294 -12 340 -103 387 -40 21 -144 27 -194 10z';
+const NB = `${B_OUTER} ${B_COUNTER} ${N}`;
 
 type Phase = 'load' | 'reveal' | 'idle';
 type Jump = { n: number; power: number };
 
 const SEEN_KEY = 'nb:arrived';
+const REVEAL_MS = 4200;
 
 function reducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -70,7 +76,7 @@ function placeMoon(el: HTMLElement, r: number, seconds: number, px: number, py: 
 }
 
 const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2);
-
+const clamp1 = (v: number) => Math.max(-1, Math.min(1, v));
 const isActionKey = (key: string) => key === ' ' || key === 'Enter';
 
 export function App() {
@@ -78,6 +84,7 @@ export function App() {
   const [phase, setPhase] = useState<Phase>(still ? 'idle' : 'load');
   const [jump, setJump] = useState<Jump>({ n: 0, power: 0 });
 
+  const stageRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const countRef = useRef<HTMLSpanElement>(null);
   const arcRef = useRef<SVGCircleElement>(null);
@@ -89,7 +96,7 @@ export function App() {
   const phaseRef = useRef(phase);
   phaseRef.current = phase;
 
-  // Space engine, pointer parallax, stardust, throttle.
+  // Space engine, pointer parallax, stardust, throttle, tilt.
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -118,11 +125,14 @@ export function App() {
         root.setProperty('--charge', charge.toFixed(3));
         root.setProperty('--near', near.toFixed(3));
         if (face) {
-          // The mark is lit from wherever the pointer is.
+          // Lit from wherever the pointer is, with a slight bias from above.
           face.setAttribute('cx', (960 + px * 920).toFixed(0));
-          face.setAttribute('cy', (960 - py * 920).toFixed(0));
+          face.setAttribute('cy', (1180 - py * 920).toFixed(0));
         }
         if (moon) placeMoon(moon, radius, still ? 0.6 : (performance.now() - born) / 1000, px, py);
+      },
+      onQuality(level) {
+        stageRef.current?.setAttribute('data-quality', String(level));
       },
     });
     engine.current = space;
@@ -155,7 +165,7 @@ export function App() {
     const onDown = (e: globalThis.PointerEvent) => {
       if (logoRef.current?.contains(e.target as Node)) return;
       if (e.pointerType === 'touch') dragY = e.clientY;
-      space.burst(e.clientX, e.clientY, e.pointerType === 'mouse' ? 14 : 20);
+      space.burst(e.clientX, e.clientY, e.pointerType !== 'mouse');
     };
     const onUp = () => {
       dragY = -1;
@@ -164,12 +174,28 @@ export function App() {
       if (phaseRef.current === 'load') return;
       space.nudge(e.deltaY / 900);
     };
+
+    // Tilt parallax where it works without a permission prompt (Android).
+    // Calibrated against how the phone is actually being held.
+    let base: { beta: number; gamma: number } | null = null;
+    let baseSamples = 0;
     const onTilt = (e: DeviceOrientationEvent) => {
       if (e.gamma == null || e.beta == null) return;
-      const x = Math.max(-1, Math.min(1, e.gamma / 28));
-      const y = Math.max(-1, Math.min(1, (e.beta - 45) / 28));
-      space.look(x, y);
+      if (!base) base = { beta: e.beta, gamma: e.gamma };
+      if (baseSamples < 24) {
+        baseSamples++;
+        base.beta += (e.beta - base.beta) * 0.25;
+        base.gamma += (e.gamma - base.gamma) * 0.25;
+        return;
+      }
+      if (dragY >= 0) return;
+      const dx = e.gamma - base.gamma;
+      const dy = e.beta - base.beta;
+      const dead = (v: number) => (Math.abs(v) < 1.5 ? 0 : v - Math.sign(v) * 1.5);
+      space.look(clamp1(dead(dx) / 18), clamp1(dead(dy) / 18));
     };
+    const needsPermission =
+      typeof (DeviceOrientationEvent as unknown as { requestPermission?: unknown }).requestPermission === 'function';
 
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('pointerdown', onDown, { passive: true });
@@ -177,7 +203,7 @@ export function App() {
     window.addEventListener('pointercancel', onUp, { passive: true });
     window.addEventListener('wheel', onWheel, { passive: true });
     document.documentElement.addEventListener('pointerleave', onLeave);
-    window.addEventListener('deviceorientation', onTilt, { passive: true });
+    if (!needsPermission) window.addEventListener('deviceorientation', onTilt, { passive: true });
 
     return () => {
       space.destroy();
@@ -207,7 +233,8 @@ export function App() {
       ready = true;
     });
 
-    const start = performance.now();
+    // Time already spent downloading counts toward the minimum, up to half of it.
+    const start = Math.max(0, performance.now() - minimum * 0.5);
     let raf = 0;
     let shown = -1;
     const tick = (now: number) => {
@@ -233,12 +260,13 @@ export function App() {
 
   useEffect(() => {
     if (phase !== 'reveal') return;
-    const id = window.setTimeout(() => setPhase('idle'), 3400);
+    const id = window.setTimeout(() => setPhase('idle'), REVEAL_MS);
     return () => window.clearTimeout(id);
   }, [phase]);
 
   // Hold the mark to charge, release to jump. Works for pointer and keyboard.
   const holdingRef = useRef(false);
+  const lastJumpRef = useRef(0);
   const press = () => {
     if (phaseRef.current !== 'idle' || holdingRef.current) return;
     holdingRef.current = true;
@@ -249,6 +277,9 @@ export function App() {
     holdingRef.current = false;
     const power = engine.current?.hold(false) ?? 0;
     if (still) return;
+    const now = performance.now();
+    if (now - lastJumpRef.current < 400) return;
+    lastJumpRef.current = now;
     setJump((j) => ({ n: j.n + 1, power }));
     try {
       navigator.vibrate?.(power > 0.5 ? [14, 40, 26] : 10);
@@ -286,15 +317,19 @@ export function App() {
 
   const kicked = jump.n > 0;
   const shockStyle = { '--power': jump.power.toFixed(3) } as CSSProperties;
+  const glyph = (
+    <g transform="translate(0 192) scale(0.1 -0.1)">
+      <path fillRule="evenodd" d={NB} />
+    </g>
+  );
 
   return (
-    <main className={`stage is-${phase}${still ? ' is-still' : ''}`}>
+    <main ref={stageRef} className={`stage is-${phase}${still ? ' is-still' : ''}`}>
       <h1 className="sr-only">nbsumit</h1>
 
       <div className="nebula" aria-hidden="true">
         <div className="cloud cloud-a" />
         <div className="cloud cloud-b" />
-        <div className="cloud cloud-c" />
       </div>
       <canvas ref={canvasRef} className="sky" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
@@ -302,7 +337,9 @@ export function App() {
 
       <div className="scene">
         <span ref={moonRef} className="moon" aria-hidden="true" />
-        <span className="halo" aria-hidden="true" />
+        <span className="halo" aria-hidden="true">
+          <span className="halo-core" />
+        </span>
         <div className="flash" aria-hidden="true" />
         {kicked && <div key={jump.n} className="shock" style={shockStyle} aria-hidden="true" />}
 
@@ -333,6 +370,9 @@ export function App() {
             aria-label="nb. Hold and release to jump to lightspeed"
             tabIndex={phase === 'load' ? -1 : 0}
           >
+            <svg className="bloom" viewBox="0 0 192 192" aria-hidden="true" fill="#dfe8ff">
+              {glyph}
+            </svg>
             <svg className="mark" viewBox="0 0 192 192" aria-hidden="true">
               <defs>
                 <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
@@ -342,7 +382,7 @@ export function App() {
                   <stop offset="0.58" stopColor="#ffffff" stopOpacity="0" />
                   <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
                 </linearGradient>
-                <radialGradient ref={faceRef} id="face" gradientUnits="userSpaceOnUse" cx="960" cy="960" r="1500">
+                <radialGradient ref={faceRef} id="face" gradientUnits="userSpaceOnUse" cx="960" cy="1180" r="1500">
                   <stop offset="0" stopColor="#ffffff" />
                   <stop offset="0.45" stopColor="#eef2fa" />
                   <stop offset="1" stopColor="#aab8d2" />
@@ -355,22 +395,22 @@ export function App() {
               </defs>
               {kicked && (
                 <g key={`f${jump.n}`} className="fringes" aria-hidden="true">
-                  <g className="fringe fringe-r">
-                    <g transform="translate(0 192) scale(0.1 -0.1)">
-                      <path fill="#ff6a8a" fillRule="evenodd" d={NB} />
-                    </g>
+                  <g className="fringe fringe-r" fill="#ff6a8a">
+                    {glyph}
                   </g>
-                  <g className="fringe fringe-b">
-                    <g transform="translate(0 192) scale(0.1 -0.1)">
-                      <path fill="#62a8ff" fillRule="evenodd" d={NB} />
-                    </g>
+                  <g className="fringe fringe-b" fill="#62a8ff">
+                    {glyph}
                   </g>
                 </g>
               )}
               <g key={`g${jump.n}`} className={kicked ? 'glyphs kicked' : 'glyphs'}>
                 <g transform="translate(0 192) scale(0.1 -0.1)">
                   <path className="glyph-fill" fill="url(#face)" fillRule="evenodd" d={NB} />
-                  <path className="glyph-line" fill="none" d={NB} pathLength={1} />
+                  <g className="glyph-lines" fill="none">
+                    <path className="glyph-line line-n" d={N} pathLength={1} />
+                    <path className="glyph-line line-b" d={B_OUTER} pathLength={1} />
+                    <path className="glyph-line line-c" d={B_COUNTER} pathLength={1} />
+                  </g>
                 </g>
               </g>
               <g mask="url(#nb)">
