@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-locked">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>nbsumit</title>
-    <meta name="description" content="nbsumit. Sumit Sengar." />
+    <title>Sumit | Independent Founder & Builder</title>
+    <meta
+      name="description"
+      content="Sumit is an independent founder and builder. This is the home for the work: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery."
+    />
     <meta name="author" content="Sumit Sengar" />
     <link rel="canonical" href="https://nbsumit.com/" />
     <meta name="color-scheme" content="dark" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nbsumit.com/" />
-    <meta property="og:title" content="nbsumit" />
-    <meta property="og:description" content="nbsumit" />
-    <meta property="og:site_name" content="nbsumit.com" />
+    <meta property="og:title" content="Sumit | Independent Founder & Builder" />
+    <meta
+      property="og:description"
+      content="Sumit is an independent founder and builder. This is the home for the work: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery."
+    />
+    <meta property="og:site_name" content="nbsumit" />
+    <meta property="og:locale" content="en" />
     <meta property="og:image" content="https://nbsumit.com/og.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="The nb mark in space" />
+    <meta property="og:image:alt" content="Sumit. Independent Founder and Builder." />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@nbsumit" />
-    <meta name="twitter:title" content="nbsumit" />
-    <meta name="twitter:description" content="nbsumit" />
+    <meta name="twitter:title" content="Sumit | Independent Founder & Builder" />
+    <meta
+      name="twitter:description"
+      content="Sumit is an independent founder and builder. This is the home for the work: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery."
+    />
     <meta name="twitter:image" content="https://nbsumit.com/og.jpg" />
+    <meta name="twitter:image:alt" content="Sumit. Independent Founder and Builder." />
 
-    <!-- Favicons & Manifest -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -36,24 +46,47 @@
 
     <meta name="theme-color" content="#000000" />
     <link rel="preload" href="/fonts/barlow-300.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-500.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Sumit Sengar",
-        "alternateName": "nbsumit",
-        "url": "https://nbsumit.com/",
-        "image": "https://nbsumit.com/nb-brand.png"
+        "@graph": [
+          {
+            "@type": "Person",
+            "name": "Sumit",
+            "alternateName": ["Sumit Sengar", "nbsumit"],
+            "url": "https://nbsumit.com/",
+            "email": "hello@nbsumit.com",
+            "jobTitle": "Independent Founder & Builder",
+            "sameAs": [
+              "https://github.com/nbsumit",
+              "https://www.linkedin.com/in/nbsumit",
+              "https://x.com/nbsumit",
+              "https://www.youtube.com/@nbsumit"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "Sumit",
+            "url": "https://nbsumit.com/",
+            "description": "Sumit is an independent founder and builder. This is the home for the work: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery."
+          }
+        ]
       }
     </script>
     <style>
-      html, body {
+      html.is-locked,
+      html.is-locked body {
         margin: 0;
-        padding: 0;
-        background-color: #000000;
+        background: #000;
+        height: 100%;
         overflow: hidden;
+      }
+      body {
+        margin: 0;
+        background: #000;
+        color: #e8edf4;
       }
       @font-face {
         font-family: 'Barlow';
@@ -62,7 +95,6 @@
         font-display: swap;
         src: url('/fonts/barlow-300.woff2') format('woff2');
       }
-      /* Painted before the bundle runs; React replaces it with the live ring. */
       .pre {
         position: fixed;
         inset: 0;
@@ -72,6 +104,7 @@
         letter-spacing: 0.42em;
         text-indent: 0.42em;
         color: rgba(236, 240, 246, 0.82);
+        background: #000;
       }
       .pre-ring {
         position: absolute;
@@ -83,21 +116,47 @@
         border-radius: 50%;
         border: 1.5px solid rgba(236, 240, 246, 0.12);
       }
-      .nojs {
+      .static-fallback {
         position: fixed;
         inset: 0;
-        display: grid;
-        place-items: center;
+        z-index: 5;
+        overflow: auto;
         background: #000;
+        color: #e8edf4;
+        font: 400 17px/1.6 'Barlow', system-ui, sans-serif;
+        padding: 3rem 1.25rem 4rem;
       }
-      .nojs img { width: 180px; height: 180px; }
+      .static-fallback h1 {
+        font-weight: 400;
+        font-size: 2.4rem;
+        margin: 0 0 0.25rem;
+      }
+      .static-fallback a {
+        color: #e8edf4;
+      }
     </style>
 
-    <script type="module" crossorigin src="/assets/index-it36zlig.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D8O9nnmo.css">
+    <script type="module" crossorigin src="/assets/index-BEbx-r-H.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-VVWLHWVM.css">
   </head>
   <body>
     <div id="root"><div class="pre" aria-hidden="true"><span class="pre-ring"></span><span>000</span></div></div>
-    <noscript><div class="nojs"><img src="/nb-mark.png" alt="nb" /></div></noscript>
+    <noscript>
+      <div class="static-fallback">
+        <h1>Sumit</h1>
+        <p>Independent Founder &amp; Builder</p>
+        <p>I like building things. Products, software and study tools, made to be useful.</p>
+        <p>Orbis and ApplyReady are free. GATE CS Mastery keeps a large share of its study material free. Bittyfy is in its Reborn phase: print a code once, and change what it opens later.</p>
+        <ul>
+          <li><a href="https://orbis.nbsumit.com/">Orbis</a></li>
+          <li><a href="https://orbis3d.nbsumit.com/">Orbis3D</a></li>
+          <li><a href="https://bittyfy.com">Bittyfy</a></li>
+          <li><a href="https://applyready.in">ApplyReady</a></li>
+          <li><a href="https://gatecsmastery.com">GATE CS Mastery</a></li>
+          <li><a href="https://static.gatecsmastery.com/">GATE CS Mastery, free study material</a></li>
+        </ul>
+        <p><a href="mailto:hello@nbsumit.com">hello@nbsumit.com</a></p>
+      </div>
+    </noscript>
   </body>
 </html>

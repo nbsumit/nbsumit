@@ -73,11 +73,15 @@ export type SpaceEngine = {
   trail: (x: number, y: number) => void;
   /** Scatter sparks at a screen point. Touch sparks are bigger. */
   burst: (x: number, y: number, touch?: boolean) => void;
+  /** Pause drawing when the hero is off screen. */
+  setRunning: (on: boolean) => void;
   destroy: () => void;
 };
 
 type Options = {
   reducedMotion: boolean;
+  /** Start already cruising, when the intro is skipped for a deep link. */
+  settled?: boolean;
   onFrame?: (info: FrameInfo) => void;
   /** Called when the engine steps quality down: 0 full, 1 lighter, 2 lightest. */
   onQuality?: (level: number) => void;
@@ -168,6 +172,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
       focus() {},
       trail() {},
       burst() {},
+      setRunning() {},
       destroy() {},
     };
   }
@@ -185,10 +190,11 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
   const meteors: Meteor[] = [];
   const motes: Mote[] = [];
 
-  let speed = opts.reducedMotion ? 0 : LIGHTSPEED;
+  const settled = !!opts.settled;
+  let speed = opts.reducedMotion ? 0 : settled ? CRUISE : LIGHTSPEED;
   let target = speed;
-  let warpUntil = opts.reducedMotion ? 0 : Number.POSITIVE_INFINITY;
-  let arrived = opts.reducedMotion;
+  let warpUntil = opts.reducedMotion || settled ? 0 : Number.POSITIVE_INFINITY;
+  let arrived = opts.reducedMotion || settled;
   let holding = false;
   let holdStart = 0;
   let charge = 0;
@@ -203,6 +209,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
   let last = performance.now();
   let raf = 0;
   let alive = true;
+  let running = true;
   let dprQuery: MediaQueryList | null = null;
 
   // Adaptive quality: step down if frames are consistently slow at cruise.
@@ -519,7 +526,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
       ctx.globalCompositeOperation = 'source-over';
     }
 
-    if (alive && !document.hidden && (!opts.reducedMotion || motes.length || meteors.length)) {
+    if (alive && running && !document.hidden && (!opts.reducedMotion || motes.length || meteors.length)) {
       raf = requestAnimationFrame(frame);
     } else {
       raf = 0;
@@ -527,7 +534,7 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
   };
 
   const wake = () => {
-    if (!raf && alive && !document.hidden) {
+    if (!raf && alive && running && !document.hidden) {
       last = performance.now();
       raf = requestAnimationFrame(frame);
     }
@@ -611,6 +618,16 @@ export function createSpace(canvas: HTMLCanvasElement, opts: Options): SpaceEngi
       if (opts.reducedMotion) return;
       const n = touch ? 28 : 16;
       for (let i = 0; i < n; i++) addMote(x, y, touch ? 220 : 150, touch ? 2 : 1.5, touch ? 14 : 4);
+      wake();
+    },
+    setRunning(on) {
+      running = on;
+      if (!alive) return;
+      if (!on) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        return;
+      }
       wake();
     },
     destroy() {

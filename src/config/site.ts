@@ -3,26 +3,22 @@ export interface NavLink {
   href: string;
 }
 
-export const SITE_CONFIG = {
-  name: 'Sumit Sengar',
+export const SITE = {
+  name: 'Sumit',
+  fullName: 'Sumit Sengar',
   handle: 'nbsumit',
-  brand: 'NB',
   domain: 'nbsumit.com',
-  url: 'https://nbsumit.com',
-  title: 'nbsumit | Sumit Sengar - Independent Developer & Creator',
-  tagline: 'Independent developer & creator',
-  headline: 'I build useful things for the internet.',
-  supporting: 'I create digital products, web applications, tools, and educational content, turning ideas into things people can actually use.',
-  description: 'Personal brand and portfolio of Sumit Sengar (nbsumit) - Independent developer and builder creating software, web applications, GIS data tools, and educational products.',
+  url: 'https://nbsumit.com/',
+  title: 'Sumit | Independent Founder & Builder',
+  description:
+    'Sumit is an independent founder and builder. This is the home for the work: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery.',
   email: 'hello@nbsumit.com',
-  status: 'Available for focused projects and collaborations',
-  location: 'India (IST · UTC+5:30)',
-  navLinks: [
-    { label: 'Work', href: '#work' },
-    { label: 'Services', href: '#services' },
-    { label: 'Approach', href: '#approach' },
+  role: 'Independent Founder & Builder',
+  nav: [
     { label: 'About', href: '#about' },
-    { label: 'Writing', href: '#writing' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Philosophy', href: '#philosophy' },
+    { label: 'Vision', href: '#vision' },
+    { label: 'Connect', href: '#connect' },
   ] as NavLink[],
 };

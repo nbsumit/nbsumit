@@ -1,4 +1,7 @@
-import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type MouseEvent, type PointerEvent } from 'react';
+import { Footer, Site } from './components/Site';
+import { Nav } from './components/Nav';
+import { SITE } from './config/site';
 import { createSpace, type SpaceEngine } from './space/engine';
 
 // The mark, as three strokes: the bowl of the b, its counter, and the n.
@@ -81,7 +84,9 @@ const isActionKey = (key: string) => key === ' ' || key === 'Enter';
 
 export function App() {
   const [still] = useState(reducedMotion);
-  const [phase, setPhase] = useState<Phase>(still ? 'idle' : 'load');
+  const [deepLink] = useState(() => window.location.hash.length > 1);
+  const [phase, setPhase] = useState<Phase>(still || deepLink ? 'idle' : 'load');
+  const skipIntroRef = useRef(still || deepLink);
   const [jump, setJump] = useState<Jump>({ n: 0, power: 0 });
 
   const stageRef = useRef<HTMLElement>(null);
@@ -114,10 +119,14 @@ export function App() {
     };
     measure();
     window.addEventListener('resize', measure);
+    const rig = rigRef.current;
+    const observer = rig ? new ResizeObserver(measure) : null;
+    if (rig && observer) observer.observe(rig);
     const born = performance.now();
 
     const space = createSpace(canvas, {
       reducedMotion: still,
+      settled: deepLink && !still,
       onFrame({ px, py, warp, charge, near }) {
         root.setProperty('--px', px.toFixed(4));
         root.setProperty('--py', py.toFixed(4));
@@ -152,8 +161,13 @@ export function App() {
           lastX = e.clientX;
           lastY = e.clientY;
         }
-      } else if (e.pointerType === 'touch' && dragY >= 0 && phaseRef.current !== 'load') {
-        // Dragging a finger up the sky is the throttle.
+      } else if (
+        e.pointerType === 'touch' &&
+        dragY >= 0 &&
+        phaseRef.current !== 'load' &&
+        !document.documentElement.classList.contains('is-open')
+      ) {
+        // Dragging a finger up the sky is the throttle, only during the opening.
         space.nudge((dragY - e.clientY) / 420);
         dragY = e.clientY;
       }
@@ -164,6 +178,7 @@ export function App() {
     };
     const onDown = (e: globalThis.PointerEvent) => {
       if (logoRef.current?.contains(e.target as Node)) return;
+      if ((e.target as HTMLElement | null)?.closest?.('a, button')) return;
       if (e.pointerType === 'touch') dragY = e.clientY;
       space.burst(e.clientX, e.clientY, e.pointerType !== 'mouse');
     };
@@ -172,6 +187,7 @@ export function App() {
     };
     const onWheel = (e: WheelEvent) => {
       if (phaseRef.current === 'load') return;
+      if (document.documentElement.classList.contains('is-open')) return;
       space.nudge(e.deltaY / 900);
     };
 
@@ -197,31 +213,38 @@ export function App() {
     const needsPermission =
       typeof (DeviceOrientationEvent as unknown as { requestPermission?: unknown }).requestPermission === 'function';
 
-    window.addEventListener('pointermove', onMove, { passive: true });
-    window.addEventListener('pointerdown', onDown, { passive: true });
-    window.addEventListener('pointerup', onUp, { passive: true });
-    window.addEventListener('pointercancel', onUp, { passive: true });
-    window.addEventListener('wheel', onWheel, { passive: true });
-    document.documentElement.addEventListener('pointerleave', onLeave);
+    const stage = stageRef.current;
+    stage?.addEventListener('pointermove', onMove, { passive: true });
+    stage?.addEventListener('pointerdown', onDown, { passive: true });
+    stage?.addEventListener('pointerup', onUp, { passive: true });
+    stage?.addEventListener('pointercancel', onUp, { passive: true });
+    stage?.addEventListener('wheel', onWheel, { passive: true });
+    stage?.addEventListener('pointerleave', onLeave);
+    const visibility = new IntersectionObserver((entries) => {
+      space.setRunning(entries.some((entry) => entry.isIntersecting));
+    });
+    if (stage) visibility.observe(stage);
     if (!needsPermission) window.addEventListener('deviceorientation', onTilt, { passive: true });
 
     return () => {
       space.destroy();
       engine.current = null;
+      observer?.disconnect();
+      visibility.disconnect();
       window.removeEventListener('resize', measure);
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerdown', onDown);
-      window.removeEventListener('pointerup', onUp);
-      window.removeEventListener('pointercancel', onUp);
-      window.removeEventListener('wheel', onWheel);
-      document.documentElement.removeEventListener('pointerleave', onLeave);
+      stage?.removeEventListener('pointermove', onMove);
+      stage?.removeEventListener('pointerdown', onDown);
+      stage?.removeEventListener('pointerup', onUp);
+      stage?.removeEventListener('pointercancel', onUp);
+      stage?.removeEventListener('wheel', onWheel);
+      stage?.removeEventListener('pointerleave', onLeave);
       window.removeEventListener('deviceorientation', onTilt);
     };
-  }, [still]);
+  }, [still, deepLink]);
 
   // Loading sequence: count to 100 at lightspeed, then arrive.
   useEffect(() => {
-    if (still) return;
+    if (still || deepLink) return;
     const minimum = seenBefore() ? 1100 : 2600;
     let ready = false;
     const fonts = document.fonts?.ready ?? Promise.resolve();
@@ -238,6 +261,7 @@ export function App() {
     let raf = 0;
     let shown = -1;
     const tick = (now: number) => {
+      if (skipIntroRef.current) return;
       const linear = Math.min(1, (now - start) / minimum);
       const p = Math.min(ready ? 1 : 0.94, easeInOut(linear));
       const value = Math.round(p * 100);
@@ -256,13 +280,40 @@ export function App() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [still]);
+  }, [still, deepLink]);
 
   useEffect(() => {
     if (phase !== 'reveal') return;
     const id = window.setTimeout(() => setPhase('idle'), REVEAL_MS);
     return () => window.clearTimeout(id);
   }, [phase]);
+
+  useEffect(() => {
+    if (phase !== 'idle') return;
+    const root = document.documentElement;
+    root.classList.remove('is-locked');
+    root.classList.add('is-open');
+    const id = decodeURIComponent(window.location.hash.replace('#', ''));
+    if (!id || id === 'top') return;
+    const el = document.getElementById(id);
+    requestAnimationFrame(() => el?.scrollIntoView({ block: 'start' }));
+  }, [phase]);
+
+  const onSkip = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    skipIntroRef.current = true;
+    engine.current?.arrive();
+    markSeen();
+    setPhase('idle');
+    const root = document.documentElement;
+    root.classList.remove('is-locked');
+    root.classList.add('is-open');
+    const el = document.getElementById('about');
+    requestAnimationFrame(() => {
+      el?.focus({ preventScroll: true });
+      el?.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'start' });
+    });
+  };
 
   // Hold the mark to charge, release to jump. Works for pointer and keyboard.
   const holdingRef = useRef(false);
@@ -324,8 +375,13 @@ export function App() {
   );
 
   return (
-    <main ref={stageRef} className={`stage is-${phase}${still ? ' is-still' : ''}`}>
-      <h1 className="sr-only">nbsumit</h1>
+    <>
+    <a className="skip" href="#about" onClick={onSkip}>
+      Skip to content
+    </a>
+    <Nav />
+    <main id="top">
+    <section ref={stageRef} className={`stage is-${phase}${still ? ' is-still' : ''}${phase === 'idle' ? ' is-settled' : ''}`} aria-label="Opening">
 
       <div className="nebula" aria-hidden="true">
         <div className="cloud cloud-a" />
@@ -420,7 +476,23 @@ export function App() {
           </button>
         </div>
       </div>
+
+      <div className="arrive">
+        <div className="arrive-inner">
+          <h1>Sumit</h1>
+          <p className="role">{SITE.role}</p>
+          <p className="intro">I like building things. Products, software and study tools, made to be useful.</p>
+          <p className="arrive-actions">
+            <a href="#projects">See the work</a>
+            <a href="#connect">Write to me</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <Site />
     </main>
+    <Footer />
+    </>
   );
 }
 

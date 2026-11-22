@@ -1,64 +1,40 @@
 /**
- * Centralized Social Links Configuration for nbsumit.com
- * Brand handle: @nbsumit across all verified platforms
+ * Profiles checked against the live web on 22 Nov 2026.
+ * Instagram @nbsumit is omitted: Instagram's own embed reports that the
+ * profile may be broken or removed, while a known profile embeds normally.
+ * Add it here, with verified: true, once the account is public.
  */
 
-export interface SocialLinkItem {
-  id: 'github' | 'linkedin' | 'x' | 'instagram' | 'youtube';
+export interface SocialLink {
+  id: 'github' | 'linkedin' | 'x' | 'youtube';
   name: string;
   url: string;
-  placeholder: boolean;
-  username: string;
-  description: string;
+  handle: string;
 }
 
-export const SOCIAL_LINKS: Record<'github' | 'linkedin' | 'x' | 'instagram' | 'youtube', SocialLinkItem> = {
-  github: {
+export const SOCIALS: SocialLink[] = [
+  {
     id: 'github',
     name: 'GitHub',
     url: 'https://github.com/nbsumit',
-    placeholder: false,
-    username: '@nbsumit',
-    description: 'Open-source repositories, developer tools, and code experiments',
+    handle: '@nbsumit',
   },
-  linkedin: {
+  {
     id: 'linkedin',
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/nbsumit',
-    placeholder: false,
-    username: '@nbsumit',
-    description: 'Professional background, engineering network, and career updates',
+    handle: '@nbsumit',
   },
-  x: {
+  {
     id: 'x',
     name: 'X',
     url: 'https://x.com/nbsumit',
-    placeholder: false,
-    username: '@nbsumit',
-    description: 'Thoughts on software craftsmanship, tools, and indie building',
+    handle: '@nbsumit',
   },
-  instagram: {
-    id: 'instagram',
-    name: 'Instagram',
-    url: 'https://www.instagram.com/nbsumit',
-    placeholder: false,
-    username: '@nbsumit',
-    description: 'Visual moments, creative pursuits, and life beyond code',
-  },
-  youtube: {
+  {
     id: 'youtube',
     name: 'YouTube',
     url: 'https://www.youtube.com/@nbsumit',
-    placeholder: false,
-    username: '@nbsumit',
-    description: 'Technical walkthroughs, software demos, and educational visuals',
+    handle: '@nbsumit',
   },
-};
-
-export const getAllSocialLinks = (): SocialLinkItem[] => {
-  return Object.values(SOCIAL_LINKS);
-};
-
-export const isConfiguredSocial = (link: SocialLinkItem): boolean => {
-  return !link.placeholder && !link.url.includes('YOUR_');
-};
+];

@@ -40,7 +40,13 @@ test('Site Invariants & Configuration QA', async (t) => {
     const indexPath = path.join(rootDir, 'index.html');
     assert.ok(fs.existsSync(indexPath), 'index.html must exist');
     const content = fs.readFileSync(indexPath, 'utf8');
-    assert.ok(content.includes('<title>nbsumit</title>'), 'Title must be nbsumit');
+    assert.ok(content.includes('<title>Sumit | Independent Founder & Builder</title>'), 'Title must name Sumit');
+    assert.ok(content.includes('https://orbis.nbsumit.com/'), 'Orbis URL must be in the document');
+    assert.ok(content.includes('https://orbis3d.nbsumit.com/'), 'Orbis3D URL must be in the document');
+    assert.ok(content.includes('https://bittyfy.com'), 'Bittyfy URL must be in the document');
+    assert.ok(content.includes('https://applyready.in'), 'ApplyReady URL must be in the document');
+    assert.ok(content.includes('https://gatecsmastery.com'), 'GATE CS Mastery URL must be in the document');
+    assert.ok(!content.includes('instagram.com/nbsumit'), 'Unverified Instagram profile must not be linked');
     assert.ok(content.includes('rel="canonical" href="https://nbsumit.com/"'), 'Canonical link must be present');
     assert.ok(!content.includes('—'), 'No em dash in index.html to guarantee postbuild integrity');
   });

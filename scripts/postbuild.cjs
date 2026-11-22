@@ -83,6 +83,16 @@ for (const file of rootMetaFiles) {
   }
 }
 
+const distWork = path.join(distDir, 'work');
+const rootWork = path.join(rootDir, 'work');
+if (fs.existsSync(distWork)) {
+  if (fs.existsSync(rootWork)) {
+    fs.rmSync(rootWork, { recursive: true, force: true });
+  }
+  fs.cpSync(distWork, rootWork, { recursive: true });
+  console.log('✓ Synced dist/work -> ./work');
+}
+
 // 5. Ensure .nojekyll exists in root
 fs.writeFileSync(path.join(rootDir, '.nojekyll'), '');
 console.log('✓ Verified ./.nojekyll');
