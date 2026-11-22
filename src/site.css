@@ -24,13 +24,27 @@
 
 :root {
   --text: #e8edf4;
+  --text-strong: #f4f7fb;
   --muted: #c5ceda;
   --line: rgba(232, 237, 244, 0.14);
+  --link-line: rgba(232, 237, 244, 0.4);
   --page: 72rem;
+  --narrow: 48rem;
   --measure: 38rem;
   --serif: 'Newsreader', 'Iowan Old Style', Palatino, 'Palatino Linotype', serif;
   --sans: 'Barlow', system-ui, sans-serif;
   --pad: clamp(1.25rem, 4vw, 2.5rem);
+  --section-y: clamp(4.5rem, 11vh, 8rem);
+  --body: 1.0625rem;
+  --leading: 1.65;
+  --h2: clamp(2.1rem, 4vw, 3rem);
+  --h4: clamp(1.85rem, 3vw, 2.45rem);
+  --hit: 44px;
+  --icon: 18px;
+  --icon-gap: 0.65rem;
+  --link-gap: 1.5rem;
+  --hover: 0.18s ease;
+  --focus: #f4f7fc;
 }
 
 html {
@@ -50,8 +64,14 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #f4f7fc;
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
+}
+
+a {
+  transition:
+    color var(--hover),
+    text-decoration-color var(--hover);
 }
 
 .skip {
@@ -129,7 +149,7 @@ html.is-open .stage {
   margin: 0;
   font-size: clamp(3.1rem, 8vw, 5.4rem);
   line-height: 0.92;
-  color: #f4f7fb;
+  color: var(--text-strong);
 }
 
 .role {
@@ -141,44 +161,49 @@ html.is-open .stage {
 .intro {
   max-width: 28rem;
   margin: 0.85rem 0 0;
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  font-size: var(--body);
+  line-height: var(--leading);
   color: var(--text);
 }
 
 .arrive-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.5rem;
+  gap: 0.35rem var(--link-gap);
   margin: 1.15rem 0 0;
 }
 
 .arrive-actions a,
 .actions a,
 .email-line a,
-.socials a,
-.foot a {
+.foot-mail {
   color: var(--text);
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.28em;
-  text-decoration-color: rgba(232, 237, 244, 0.4);
+  text-decoration-color: var(--link-line);
+}
+
+.arrive-actions a,
+.actions a,
+.foot-mail {
+  min-height: var(--hit);
+  display: inline-flex;
+  align-items: center;
 }
 
 .arrive-actions a {
   pointer-events: auto;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
   font-size: 1.02rem;
 }
 
 .arrive-actions a:hover,
 .actions a:hover,
 .email-line a:hover,
-.socials a:hover,
-.foot a:hover,
-.nav a:hover {
+.foot-mail:hover,
+.socials a:hover .social-name,
+.nav-panel a:hover,
+.foot nav a:hover {
   text-decoration-color: currentColor;
 }
 
@@ -213,8 +238,8 @@ html.is-open .nav {
   align-items: center;
   color: var(--text);
   text-decoration: none;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--hit);
+  min-height: var(--hit);
 }
 
 .nav-mark svg,
@@ -230,8 +255,8 @@ html.is-open .nav {
   background: transparent;
   color: var(--text);
   font: inherit;
-  min-height: 44px;
-  min-width: 44px;
+  min-height: var(--hit);
+  min-width: var(--hit);
   padding: 0 0.15rem;
   cursor: pointer;
 }
@@ -255,7 +280,7 @@ html.is-open .nav {
 .nav-panel a {
   color: var(--text);
   text-decoration: none;
-  min-height: 44px;
+  min-height: var(--hit);
   display: flex;
   align-items: center;
   border-top: 1px solid var(--line);
@@ -274,11 +299,11 @@ html.is-open .nav {
 .column {
   max-width: var(--page);
   margin: 0 auto;
-  padding: clamp(4.5rem, 11vh, 8rem) var(--pad);
+  padding: var(--section-y) var(--pad);
 }
 
 .column-narrow {
-  max-width: 48rem;
+  max-width: var(--narrow);
 }
 
 .section + .section .column,
@@ -288,7 +313,7 @@ html.is-open .nav {
 
 .section h2 {
   margin: 0;
-  font-size: clamp(2.1rem, 4vw, 3rem);
+  font-size: var(--h2);
   line-height: 1.05;
 }
 
@@ -298,8 +323,8 @@ html.is-open .nav {
 .status,
 .group-intro,
 .project p {
-  font-size: 1.0625rem;
-  line-height: 1.65;
+  font-size: var(--body);
+  line-height: var(--leading);
 }
 
 .lede {
@@ -355,32 +380,28 @@ html.is-open .nav {
 
 .project h4 {
   margin: 0;
-  font-size: clamp(1.85rem, 3vw, 2.45rem);
+  font-size: var(--h4);
   line-height: 1.08;
+}
+
+.project-copy p {
+  max-width: var(--measure);
 }
 
 .summary {
   margin: 0.7rem 0 0;
-  max-width: 36rem;
 }
 
 .status {
   margin: 1rem 0 0;
-  max-width: 38rem;
   color: var(--muted);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.5rem;
+  gap: 0.35rem var(--link-gap);
   margin: 1.1rem 0 0;
-}
-
-.actions a {
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
 }
 
 .stack .project + .project {
@@ -395,7 +416,7 @@ html.is-open .nav {
   font-size: clamp(1.7rem, 3.3vw, 2.45rem);
   line-height: 1.28;
   font-weight: 400;
-  color: #f3f6fb;
+  color: var(--text-strong);
 }
 
 .motto {
@@ -406,7 +427,7 @@ html.is-open .nav {
   font-size: clamp(2.5rem, 5.5vw, 3.75rem);
   line-height: 1;
   letter-spacing: -0.03em;
-  color: #f3f6fb;
+  color: var(--text-strong);
 }
 
 .email-line {
@@ -416,8 +437,6 @@ html.is-open .nav {
 .email-line a {
   font-size: clamp(1.45rem, 2.5vw, 1.9rem);
   line-height: 1.25;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(232, 237, 244, 0.4);
 }
 
 .socials {
@@ -428,12 +447,35 @@ html.is-open .nav {
   gap: 0.15rem;
 }
 
+.foot .socials-names {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1.1rem;
+  margin: 0;
+}
+
 .socials a {
-  min-height: 44px;
+  min-height: var(--hit);
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.75rem;
+  align-items: center;
+  gap: var(--icon-gap);
+  color: var(--text);
   text-decoration: none;
+}
+
+.socials svg {
+  width: var(--icon);
+  height: var(--icon);
+  flex: 0 0 var(--icon);
+  display: block;
+}
+
+.socials .social-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+  text-decoration-color: var(--link-line);
 }
 
 .socials .handle,
@@ -457,14 +499,13 @@ html.is-open .nav {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  min-height: 44px;
+  min-height: var(--hit);
   text-decoration: none;
   color: var(--text);
   margin-right: 0.5rem;
 }
 
-.foot nav,
-.foot-socials {
+.foot nav {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 1.1rem;
@@ -474,11 +515,22 @@ html.is-open .nav {
 }
 
 .foot nav a,
-.foot-socials a,
 .foot-mail {
-  min-height: 44px;
+  min-height: var(--hit);
   display: inline-flex;
   align-items: center;
+}
+
+.foot nav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.foot nav a:hover,
+.nav-panel a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
 }
 
 .foot-motto {
@@ -531,6 +583,7 @@ html.is-open .nav {
 @media (max-height: 760px) {
   html.is-open .stage {
     --size: clamp(96px, 20vmin, 160px);
+    --orbit: min(calc(var(--size) * 1.95), calc(100vw - 40px));
   }
 
   .is-settled .scene {
@@ -539,6 +592,17 @@ html.is-open .nav {
 
   .arrive h1 {
     font-size: clamp(2.5rem, 8vw, 3.4rem);
+  }
+}
+
+@media (max-height: 640px) {
+  html.is-open .stage {
+    --size: clamp(78px, 22vmin, 108px);
+    --orbit: min(calc(var(--size) * 1.95), calc(100vw - 36px));
+  }
+
+  .is-settled .scene {
+    transform: translateY(-12vh);
   }
 }
 

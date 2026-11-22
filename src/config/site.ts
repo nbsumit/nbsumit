@@ -11,7 +11,7 @@ export const SITE = {
   url: 'https://nbsumit.com/',
   title: 'Sumit | Independent Founder & Builder',
   description:
-    'Sumit is an independent founder and builder. This is the home for the work: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery.',
+    'Sumit is an independent founder and builder. He makes useful products: Orbis, Orbis3D, Bittyfy, ApplyReady and GATE CS Mastery.',
   email: 'hello@nbsumit.com',
   role: 'Independent Founder & Builder',
   nav: [

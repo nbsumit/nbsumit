@@ -481,7 +481,9 @@ export function App() {
         <div className="arrive-inner">
           <h1>Sumit</h1>
           <p className="role">{SITE.role}</p>
-          <p className="intro">I like building things. Products, software and study tools, made to be useful.</p>
+          <p className="intro">
+            I like building things, exploring ideas, and making products that can be useful to people.
+          </p>
           <p className="arrive-actions">
             <a href="#projects">See the work</a>
             <a href="#connect">Write to me</a>

@@ -36,7 +36,7 @@ export const GROUPS: { id: GroupId; title: string; intro?: string }[] = [
   {
     id: 'software',
     title: 'Independent software',
-    intro: 'Orbis is a GIS workspace. Orbis3D is for terrain. They belong together, and they are not the same product.',
+    intro: 'Orbis and Orbis3D belong to the same family, and they are separate tools. Orbis is for maps and spatial analysis. Orbis3D is for terrain.',
   },
   {
     id: 'venture',
@@ -54,8 +54,8 @@ export const PROJECTS: Project[] = [
     name: 'Orbis',
     group: 'software',
     url: 'https://orbis.nbsumit.com/',
-    summary: 'A GIS workspace in the browser.',
-    body: 'Orbis opens vector and raster data and works the way a desktop GIS does: layers, attribute tables, styling and classification, a processing toolbox, a raster calculator, workflows, coordinate reference systems, and maps prepared for print. Files are read and processed on your own computer. There is no account, and nothing is installed.',
+    summary: 'A GIS application in the browser, for geospatial data.',
+    body: 'Orbis is meant to make geospatial processing and analysis easier to reach, without installing desktop software. It opens vector and raster data and follows the habits of a desktop GIS: layers, attribute tables, styling and classification, a processing toolbox, a raster calculator, workflows, coordinate reference systems, and maps prepared for print. Files are read and processed on your own computer. There is no account.',
     status: 'Free to use.',
     action: 'Open Orbis',
     image: {
@@ -70,8 +70,8 @@ export const PROJECTS: Project[] = [
     name: 'Orbis3D',
     group: 'software',
     url: 'https://orbis3d.nbsumit.com/',
-    summary: 'Elevation data, as 3D terrain.',
-    body: 'Orbis3D turns a digital elevation model into terrain you can light, colour and measure. It computes slope, aspect, hillshade, contours and profiles, follows how water moves across a surface, and includes runoff tools plus an experimental flood model. It reads GeoTIFF, Cloud Optimized GeoTIFF, ESRI ASCII Grid and SRTM, and it can export 3D models. Processing stays on your computer.',
+    summary: '3D terrain in the browser, in its own workspace.',
+    body: 'Orbis3D sits beside Orbis. It is not a mode inside it. Open an elevation model and turn it into terrain you can light, colour and measure. The workspace computes slope, aspect, hillshade, contours and profiles, follows how water moves across a surface, and includes runoff tools plus an experimental flood model. It reads GeoTIFF, Cloud Optimized GeoTIFF, ESRI ASCII Grid and SRTM, and it can export a 3D model. Processing stays on your computer.',
     status: 'Free and open source.',
     action: 'Open Orbis3D',
     image: {
@@ -86,10 +86,10 @@ export const PROJECTS: Project[] = [
     name: 'Bittyfy',
     group: 'venture',
     url: 'https://bittyfy.com',
-    summary: 'A digital presence and QR platform for small businesses.',
-    body: 'Bittyfy is for cafés, restaurants, dhabas, food stalls and local shops in India. Print it once. Change it anytime. Never reprint. This is the fourth launch, and the phase is called Bittyfy Reborn. A good deal of the architecture is new.',
+    summary: 'A digital presence and QR platform for small businesses in India.',
+    body: 'Bittyfy is in a major rebuild called Bittyfy Reborn, its fourth launch. The direction is a simple digital presence for cafes, restaurants, dhabas, food stalls, local shops and other small businesses. Print it once. Change it anytime. Never reprint.',
     status:
-      'Live now: a permanent QR code, a destination you can change later, print-ready cards, menus, posters and stickers, and a page of links. A few links are free. More links, and tools such as scheduling, are on annual plans. A single place for a shop, with its links, menu and contact details, is the direction of this phase. It is not offered as a finished feature.',
+      'What you can use today is a link you name, a QR code that stays the same when the destination changes, print for cards, menus, posters and stickers, and a page of links. A few links are free. Annual plans add more links, and tools such as scheduling. A single place for a shop\'s links, menu and contact details is where this phase is going. That part is not finished.',
     action: 'Open Bittyfy',
   },
   {
@@ -97,8 +97,8 @@ export const PROJECTS: Project[] = [
     name: 'ApplyReady',
     group: 'venture',
     url: 'https://applyready.in',
-    summary: 'Free tools for a job application.',
-    body: 'ApplyReady is a resume builder, together with tools for the photos, signatures and PDFs an application form asks for. Everything runs in the browser. Files are not uploaded. There is no account, no advertising and no paid tier, and the code is public.',
+    summary: 'Free tools for a resume and the documents a job application asks for.',
+    body: 'ApplyReady is a resume builder, and it also prepares photos, signatures and PDFs to the size a form requires. It runs in the browser. Files are not uploaded. There is no account, no advertising and no paid tier.',
     status: 'Free.',
     action: 'Open ApplyReady',
   },
@@ -107,9 +107,9 @@ export const PROJECTS: Project[] = [
     name: 'GATE CS Mastery',
     group: 'education',
     url: 'https://gatecsmastery.com',
-    summary: 'Study material for the GATE Computer Science exam.',
-    body: 'Cheat sheets and formula sheets, with pages you can look through before you buy them. The free study site has short notes, study pages by subject and topic, previous-year questions with solutions, and timed mock tests, including past papers. A large part of the material is free so the basics are not something a person has to pay for.',
-    status: 'Live. Notes, past questions and mock tests are free. Cheat sheets and formula sheets are sold.',
+    summary: 'Study material for the GATE Computer Science exam, with a substantial share of it free.',
+    body: 'GATE CS Mastery is an educational project for GATE Computer Science. Cheat sheets and formula sheets cover the subjects, and you can preview pages before buying them. The study site beside them is free and needs no account: short notes, topic pages, previous-year questions with solutions, and timed mock tests, including past papers.',
+    status: 'Notes, past questions and mock tests are free. Cheat sheets and formula sheets are sold.',
     action: 'Open GATE CS Mastery',
     links: [
       {

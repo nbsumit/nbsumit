@@ -1,12 +1,11 @@
 /**
- * Profiles checked against the live web on 22 Nov 2026.
- * Instagram @nbsumit is omitted: Instagram's own embed reports that the
- * profile may be broken or removed, while a known profile embeds normally.
- * Add it here, with verified: true, once the account is public.
+ * Profiles for @nbsumit.
+ * Instagram was private and is now public. A direct fetch still hits
+ * Instagram's login wall; the public embed for this username loads.
  */
 
 export interface SocialLink {
-  id: 'github' | 'linkedin' | 'x' | 'youtube';
+  id: 'github' | 'linkedin' | 'instagram' | 'x' | 'youtube';
   name: string;
   url: string;
   handle: string;
@@ -23,6 +22,12 @@ export const SOCIALS: SocialLink[] = [
     id: 'linkedin',
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/nbsumit',
+    handle: '@nbsumit',
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    url: 'https://www.instagram.com/nbsumit/',
     handle: '@nbsumit',
   },
   {
