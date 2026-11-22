@@ -108,13 +108,19 @@ const checkFiles = [
   ...fs.readdirSync(rootAssets).map(f => path.join(rootAssets, f))
 ];
 
+const hasEmoji = (text) => /\p{Extended_Pictographic}|\p{Regional_Indicator}/u.test(text.replace(/[\u00A9\u00AE]/g, ''));
+
 for (const filePath of checkFiles) {
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     const content = fs.readFileSync(filePath, 'utf8');
-    if (content.includes('—')) {
-      console.error(`QA Failure: Em dash (—) found in ${filePath}`);
+    if (content.includes('—') || content.includes('&mdash;') || content.includes('&#8212;')) {
+      console.error(`QA Failure: Em dash found in ${filePath}`);
+      process.exit(1);
+    }
+    if (/\.(html|js|css)$/.test(filePath) && hasEmoji(content)) {
+      console.error(`QA Failure: Emoji found in ${filePath}`);
       process.exit(1);
     }
   }
 }
-console.log('✓ QA Verified: 0 em dash (—) occurrences in production assets');
+console.log('✓ QA Verified: no em dash or emoji in production HTML, JS and CSS');

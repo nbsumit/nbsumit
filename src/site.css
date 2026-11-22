@@ -398,6 +398,17 @@ html.is-open .nav {
   color: #f3f6fb;
 }
 
+.motto {
+  margin: 2.75rem 0 0;
+  max-width: none;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 5.5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #f3f6fb;
+}
+
 .email-line {
   margin: 1.6rem 0 0;
 }
@@ -468,6 +479,14 @@ html.is-open .nav {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+}
+
+.foot-motto {
+  flex: 1 0 100%;
+  margin: 0.85rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
 }
 
 .copy {

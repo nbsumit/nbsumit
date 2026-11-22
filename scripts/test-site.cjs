@@ -48,6 +48,7 @@ test('Site Invariants & Configuration QA', async (t) => {
     assert.ok(content.includes('https://gatecsmastery.com'), 'GATE CS Mastery URL must be in the document');
     assert.ok(!content.includes('instagram.com/nbsumit'), 'Unverified Instagram profile must not be linked');
     assert.ok(content.includes('rel="canonical" href="https://nbsumit.com/"'), 'Canonical link must be present');
+    assert.ok(content.includes('Be kind'), 'The motto must be present for no-JS readers');
     assert.ok(!content.includes('—'), 'No em dash in index.html to guarantee postbuild integrity');
   });
 

@@ -114,6 +114,10 @@ export function Site() {
               standard I want the work to meet.
             </p>
           </div>
+          <p className="motto">
+            <span className="sr-only">Personal motto. </span>
+            Be kind
+          </p>
         </div>
       </section>
 
@@ -123,7 +127,7 @@ export function Site() {
           <div className="prose">
             <p>These are hopes. None of them exist yet.</p>
             <p>
-              I want to establish an organisation that can help as many people as possible, and I want more people to
+              I want to establish an NGO that can help as many people as possible, and I want more people to
               know their rights. I want resources and opportunities to be easier to reach. In time, I want to build a
               space company. Under all of that is a question I keep returning to: how technology, science and human
               values can work together for people.
@@ -194,6 +198,7 @@ export function Footer() {
         <a className="foot-mail" href={`mailto:${SITE.email}`}>
           {SITE.email}
         </a>
+        <p className="foot-motto">Be kind</p>
         <p className="copy">&copy; {year} Sumit</p>
       </div>
     </footer>
